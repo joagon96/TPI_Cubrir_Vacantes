@@ -16,24 +16,30 @@ include "Header.php"
   
 <div class="container">
   <div class="row">
-    <div class="col-md-4">
-      <h2>Charla Seguridad Informática</h2>
-      <p><img src="https://www.frro.utn.edu.ar/fotonoticias/100001223_2020_adr_charla_ciberseguridad_vertical.jpg" alt="" width="70%" ></p>
-      <p><a class="btn btn-secondary" href="#" role="button">Mas informacion &raquo;</a></p>
+    <div class="col-md-4 " >
+      <div class="container" style="height:100%; background-color: #e9ecef">
+        <h2>Charla Seguridad Informática</h2>
+        <p><img class="image-responsive" style="height:400px; width:100% " src="https://www.frro.utn.edu.ar/fotonoticias/100001223_2020_adr_charla_ciberseguridad_vertical.jpg" alt="" ></p>
+        <p><a class="btn btn-secondary" href="#" role="button">Mas informacion &raquo;</a></p>
+      </div>
     </div>
     <div class="col-md-4">
-      <h2>Convocatoria Programa UTN DAAD 2022</h2>
-      <p style="text-align:center" ><img src="https://www.frro.utn.edu.ar/fotonoticias/100001222_convocatoria-daad2022.jpeg" alt="" width="70%"></p>
-      <br>
-      <p>La SAU informa que: Se encuentra abierta la convocatoria al PROGRAMA UTN-DADD ...</p>
-      <p><a class="btn btn-secondary" href="#" role="button">Mas informacion  &raquo;</a></p>
+      <div class="container" style="height:100%; background-color: #e9ecef" height="100%">
+        <h2>Convocatoria Programa UTN DAAD 2022</h2>
+        <p style="text-align:center" ><img src="https://www.frro.utn.edu.ar/fotonoticias/100001222_convocatoria-daad2022.jpeg" alt="" width="70%"></p>
+        <br>
+        <p>La SAU informa que: Se encuentra abierta la convocatoria al PROGRAMA UTN-DADD ...</p>
+        <p><a class="btn btn-secondary align-self-end" href="#" role="button">Mas informacion  &raquo;</a></p>
+      </div>
     </div>
-    <div class="col-md-4">
-      <h2>Talleres a distancia</h2>
-      <p>UNIVERSIDAD TECNOLÓGICA NACIONAL Facultad Regional Rosario Secretaría de Cultura y Extensión Universitaria </p>
-      <p>Programa de Capacitación 2020</p>
-      <p> COMPONENTES DE LAS INSTALACIONES ELÉCTRICAS DE BAJA TENSIÓN Objetivos: Adquirir los conocimientos necesarios para poder seleccionar los materiales y equipos que ...</p>
-      <p><a class="btn btn-secondary" href="#" role="button">Mas informacion  &raquo;</a></p>
+    <div class="col-md-4 ">
+      <div class="container" style="height:100%; background-color: #e9ecef" height="100%">
+        <h2>Talleres a distancia</h2>
+        <p>UNIVERSIDAD TECNOLÓGICA NACIONAL Facultad Regional Rosario Secretaría de Cultura y Extensión Universitaria </p>
+        <p>Programa de Capacitación 2020</p>
+        <p> COMPONENTES DE LAS INSTALACIONES ELÉCTRICAS DE BAJA TENSIÓN Objetivos: Adquirir los conocimientos necesarios para poder seleccionar los materiales y equipos que ...</p>
+        <p><a class="btn btn-secondary" href="#" role="button">Mas informacion  &raquo;</a></p>
+      </div>
     </div>
   </div>
 </div> 

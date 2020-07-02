@@ -5,7 +5,7 @@
               <a class="nav-link" href="Home.php">Inicio <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="Iniciar sesion.html">Bolsa de trabajo</a>
+              <a class="nav-link" href="CubrirVacantes.php">Bolsa de trabajo</a>
             </li>
           </ul>
           <ul class="navbar-nav " >
@@ -13,7 +13,7 @@
                 <a class="nav-link" href="Iniciar sesion.php">Iniciar Sesion</a>
             </li>
             <li  class="nav-item">
-                <a class="nav-link" href="#">Registrar</a>
+                <a class="nav-link" href="Registrar.php">Registrar</a>
             </li>
           </ul>
         </div>
@@ -22,7 +22,7 @@
 <div class="jumbotron">
   <div class="container">
     <br>
-    <img src="img/imagenutn.png" alt="">
+    <img class="img-responsive" src="img/imagenutn.png" alt="">
   </div>
 </div>
   

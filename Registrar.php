@@ -14,7 +14,7 @@
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar Sesion</title>
+    <title>Crear Cuenta</title>
 </head>
 <body class="text-center">
 
@@ -24,15 +24,18 @@
 
 <div class="container">
     <form class="form-signin rounded" style="background-color: #e9ecef">
-        <h1 class="h3 mb-3 font-weight-normal">Ingrese sus datos</h1>
+        <h1 class="h3 mb-3 font-weight-normal">Crear Cuenta</h1>
         <br>
         <label for="usuario" class="sr-only">Usuario</label>
         <input type="text" id="usuario" class="form-control" placeholder="Usuario" required autofocus>
         <br>
+        <label for="email" class="sr-only">Email</label>
+        <input type="email" id="email" class="form-control" placeholder="Direccion e-mail" required autofocus>
+        <br>
         <label for="contraseña" class="sr-only">Contraseña</label>
         <input type="password" id="contraseña" class="form-control" placeholder="Contraseña" required>
         <br>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Iniciar sesion</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Crear Cuenta</button>
     </form>
 </div>
 

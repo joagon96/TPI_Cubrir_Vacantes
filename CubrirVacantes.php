@@ -1,40 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <style>
-        .form-signin {
-            width: 100%;
-            max-width: 330px;
-            padding: 15px;
-            margin: 0 auto;
-}
     </style>
     <!-- CSS only -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar Sesion</title>
+    <title>Bolsa de Trabajo</title>
 </head>
 <body class="text-center">
 
  <?php 
  include "Header.php"
  ?>
-
+<h1>Vacantes</h1>
 <div class="container">
-    <form class="form-signin rounded" style="background-color: #e9ecef">
-        <h1 class="h3 mb-3 font-weight-normal">Ingrese sus datos</h1>
-        <br>
-        <label for="usuario" class="sr-only">Usuario</label>
-        <input type="text" id="usuario" class="form-control" placeholder="Usuario" required autofocus>
-        <br>
-        <label for="contraseña" class="sr-only">Contraseña</label>
-        <input type="password" id="contraseña" class="form-control" placeholder="Contraseña" required>
-        <br>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Iniciar sesion</button>
-    </form>
+    <table class="table">
+        <thead class="thead-light">
+        <tr>
+            <th scope="col">Numero</th>
+            <th scope="col">Titulo</th>
+            <th scope="col">Detalle</th>
+        </tr>
+        <tr>
+            <td>01</td>
+            <td>Soporte Tecnico</td>
+            <td><a href="Detalles.php"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+                <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+                </svg></a></td>
+        </tr>
+        </thead>
+    </table>
 </div>
+
 
  <?php 
  include "Footer.php"

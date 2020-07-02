@@ -1,40 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <style>
-        .form-signin {
-            width: 100%;
-            max-width: 330px;
-            padding: 15px;
-            margin: 0 auto;
-}
     </style>
     <!-- CSS only -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar Sesion</title>
+    <title>Bolsa de Trabajo</title>
 </head>
-<body class="text-center">
+<body>
 
  <?php 
  include "Header.php"
  ?>
-
-<div class="container">
-    <form class="form-signin rounded" style="background-color: #e9ecef">
-        <h1 class="h3 mb-3 font-weight-normal">Ingrese sus datos</h1>
-        <br>
-        <label for="usuario" class="sr-only">Usuario</label>
-        <input type="text" id="usuario" class="form-control" placeholder="Usuario" required autofocus>
-        <br>
-        <label for="contraseña" class="sr-only">Contraseña</label>
-        <input type="password" id="contraseña" class="form-control" placeholder="Contraseña" required>
-        <br>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Iniciar sesion</button>
-    </form>
-</div>
+<h1>Nombre vacante</h1>
+<p>Detalles de la vacante</p>
+<a href="Registrar.php">Enviar CV</a>
 
  <?php 
  include "Footer.php"
