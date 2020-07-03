@@ -9,14 +9,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bolsa de Trabajo</title>
 </head>
-<body>
+<body class="text-center">
 
  <?php 
  include "Header.php"
  ?>
-<h1>Nombre vacante</h1>
-<p>Detalles de la vacante</p>
-<a href="Registrar.php">Enviar CV</a>
+
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h2 class="card-title">Soporte Tecnico</h2>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-2 text-left">Fecha Desde:</div>
+                <div class="col-md-10 text-left">03/07/2020</div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-2 text-left">Fecha Hasta:</div>
+                <div class="col-md-10 text-left">05/10/2020</div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-2 text-left">Descripcion del puesto:</div>
+                <div class="col-md-10 text-left">
+                <p> Nombre del Puesto: Asistente del Equipo de Desarrollo y Soporte
+                    Area/Dpto: DESARROLLO Y ATENCIÓN AL CLIENTE
+                    * Asistente de Equipo de Desarrollo y Soporte *
+                    Para brindar asistencia al equipo de desarrollo y soporte, necesitamos incorporar a nuestro staff una persona con
+                    las siguientes características:
+                    - Programador Junior.
+                    - Alumno carrera Ing. Sistemas.
+                    - Conocimientos sobre conceptos de SQL y bases de datos relacionales.
+                    - Preferentemente conocimientos de desarrollo de software escritorio (Visual Basic, VisualFox) y/o web (PHP,
+                    JavaScript, Bootstrap)
+                    - Preferentemente conocimientos en manejo y/o soporte de software ERP o conocimientos sobre conceptos
+                    administrativos/contables.
+                    Lugar de Trabajo: SAN LORENZO 1333 PISO 6 OF B – ROSARIO –
+                    SANTA FE
+                    Días y horario estipulado: Lunes a Viernes de 08:30 a 12:30
+                </p>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+        <a href="Registrar.php">Enviar CV</a>
+        </div>
+    </div>
+</div>
+
+
+<a href="CubrirVacantes.php">Volver a Vacantes</a>
 
  <?php 
  include "Footer.php"

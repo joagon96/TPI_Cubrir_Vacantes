@@ -14,27 +14,51 @@
  <?php 
  include "Header.php"
  ?>
-<h1>Vacantes</h1>
-<div class="container">
-    <table class="table">
-        <thead class="thead-light">
-        <tr>
-            <th scope="col">Numero</th>
-            <th scope="col">Titulo</th>
-            <th scope="col">Detalle</th>
-        </tr>
-        <tr>
-            <td>01</td>
-            <td>Soporte Tecnico</td>
-            <td><a href="Detalles.php"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
-                <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
-                </svg></a></td>
-        </tr>
-        </thead>
-    </table>
-</div>
+<h1>Bolsa de Trabajo</h1>
 
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <div class="class row">
+            <div class="col-md-10">
+                <h2 class="text-center" style="margin-left:20%">Vacantes</h2>
+            </div>
+            <div class="col-md-2">
+            <a href="NuevaVacante.php" class="btn btn-primary" role="button" >Nueva Vacante</a>
+            </div>
+        </div>
+        <table class="card-table table">
+            <thead>
+            <tr>
+                <th scope="col">Numero</th>
+                <th scope="col">Titulo</th>
+                <th scope="col">Detalle</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>01</td>
+                <td>Soporte Tecnico</td>
+                <td>
+                    <a href="Detalles.php"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+                    <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+                    </svg></a>
+                </td>
+            </tr>
+            <tr>
+                <td>02</td>
+                <td>Docente</td>
+                <td>
+                    <a href="Detalles.php"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+                    <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+                    </svg></a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
 
  <?php 
  include "Footer.php"
