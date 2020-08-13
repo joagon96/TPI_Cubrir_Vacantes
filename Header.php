@@ -1,3 +1,9 @@
+<?php
+session_start();
+if (isset($_SESSION['usuario'])){
+  $usu = $_SESSION['usuario'];
+}
+?>
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark"> 
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
           <ul class="navbar-nav mr-auto">
@@ -8,14 +14,29 @@
               <a class="nav-link" href="CubrirVacantes.php">Bolsa de trabajo</a>
             </li>
           </ul>
-          <ul class="navbar-nav " >
-            <li  class="nav-item">
-                <a class="nav-link" href="Iniciar sesion.php">Iniciar Sesion</a>
-            </li>
-            <li  class="nav-item">
-                <a class="nav-link" href="Registrar.php">Registrar</a>
-            </li>
-          </ul>
+          <?php
+          if(!isset($usu)){
+          ?>
+            <ul class="navbar-nav " >
+              <li  class="nav-item">
+                  <a class="nav-link" href="Iniciar sesion.php">Iniciar Sesion</a>
+              </li>
+              <li  class="nav-item">
+                  <a class="nav-link" href="Registrar.php">Registrar</a>
+              </li>
+            </ul>
+          <?php } else {
+          ?>
+              <ul class="navbar-nav">
+                <li  class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropDown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php echo $usu ?></a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="CerrarSesion.php">Cerrar Sesion</a>
+                    </div>
+                </li>
+              </ul>
+          <?php  
+          } ?>
         </div>
 </nav>
 

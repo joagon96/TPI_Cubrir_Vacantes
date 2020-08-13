@@ -1,3 +1,24 @@
+<?php
+include_once "conexion.php"; 
+
+if (isset($_POST['iniciar'])){
+    $usuario = $_POST['usuario'];
+    $contraseña = $_POST['contraseña'];
+    $query = "SELECT * FROM usuarios WHERE usuario ='$usuario' AND contraseña = '$contraseña';";
+    $result = mysqli_query($link, $query);  
+
+    $filas = mysqli_num_rows($result);
+
+    if ($filas > 0){
+        session_start();
+        $_SESSION['usuario'] = $usuario;
+        header("Location:Home.php");
+    }else{
+        ?><div class="alert alert-danger" role="alert">Usuario y/o contraseña incorrecto</div><?php
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,16 +44,16 @@
  ?>
 
 <div class="container">
-    <form class="form-signin rounded" style="background-color: #e9ecef">
+    <form method="POST" class="form-signin rounded" style="background-color: #e9ecef">
         <h1 class="h3 mb-3 font-weight-normal">Ingrese sus datos</h1>
         <br>
         <label for="usuario" class="sr-only">Usuario</label>
-        <input type="text" id="usuario" class="form-control" placeholder="Usuario" required autofocus>
+        <input type="text" name="usuario" class="form-control" placeholder="Usuario" required autofocus>
         <br>
         <label for="contraseña" class="sr-only">Contraseña</label>
-        <input type="password" id="contraseña" class="form-control" placeholder="Contraseña" required>
+        <input type="password" name="contraseña" class="form-control" placeholder="Contraseña" required>
         <br>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Iniciar sesion</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" name="iniciar">Iniciar sesion</button>
     </form>
 </div>
 
