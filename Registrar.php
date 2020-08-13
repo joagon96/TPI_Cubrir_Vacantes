@@ -42,6 +42,7 @@ include_once "conexion.php";
         if ($result2){
             session_start();
             $_SESSION['usuario'] = $usuario;
+            $_SESSION['tipo'] = $tipo;
             header("Location:Home.php");
         }else{
             ?>

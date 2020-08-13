@@ -1,5 +1,8 @@
 <?php
 include "conexion.php"; 
+
+$titulo = ($_GET['var']);
+
 ?>
 <html lang="en">
 <head>
@@ -48,7 +51,7 @@ include "conexion.php";
 
 <div class="container">
     <form method="POST" class="form-signin rounded" style="background-color: #e9ecef">
-        <h1 class="h3 mb-3 font-weight-normal">Datos de la Vacante</h1>
+        <h1 class="h3 mb-3 font-weight-normal">Postulacion para <?php $titulo ?></h1>
         <div class="row">
             <div class="col-md-4">
                 <label for="titulo">Titulo Vacante:</label>

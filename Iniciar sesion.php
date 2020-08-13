@@ -1,22 +1,7 @@
 <?php
 include_once "conexion.php"; 
 
-if (isset($_POST['iniciar'])){
-    $usuario = $_POST['usuario'];
-    $contraseña = $_POST['contraseña'];
-    $query = "SELECT * FROM usuarios WHERE usuario ='$usuario' AND contraseña = '$contraseña';";
-    $result = mysqli_query($link, $query);  
 
-    $filas = mysqli_num_rows($result);
-
-    if ($filas > 0){
-        session_start();
-        $_SESSION['usuario'] = $usuario;
-        header("Location:Home.php");
-    }else{
-        ?><div class="alert alert-danger" role="alert">Usuario y/o contraseña incorrecto</div><?php
-    }
-}
 ?>
 
 <!DOCTYPE html>
@@ -40,7 +25,26 @@ if (isset($_POST['iniciar'])){
 <body class="text-center">
 
  <?php 
- include "Header.php"
+ include "Header.php";
+
+ if (isset($_POST['iniciar'])){
+    $usuario = $_POST['usuario'];
+    $contraseña = $_POST['contraseña'];
+    $query = "SELECT * FROM usuarios WHERE usuario ='$usuario' AND contraseña = '$contraseña';";
+    $result = mysqli_query($link, $query);  
+
+    $filas = mysqli_num_rows($result);
+
+    if ($filas > 0){
+        session_start();
+        $_SESSION['usuario'] = $usuario;
+        $extraido = mysqli_fetch_array($result);
+        $_SESSION['tipo'] = $extraido['tipo'];
+        header("Location:Home.php");
+    }else{
+        ?><div class="alert alert-danger" role="alert">Usuario y/o contraseña incorrecto</div><?php
+    }
+}
  ?>
 
 <div class="container">

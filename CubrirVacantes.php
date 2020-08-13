@@ -1,4 +1,14 @@
-<!DOCTYPE html>
+<?php
+include "conexion.php";
+
+$query = "SELECT * FROM vacantes;";
+$result = mysqli_query($link, $query);
+
+session_start();
+if (isset($_SESSION['usuario'])){
+    $tipo = $_SESSION['tipo'];
+}
+?>
 <html lang="en">
 <head>
 
@@ -33,13 +43,28 @@
 <div class="container">
     <div class="card">
         <div class="card-header">
-            <div class="class row">
-            <div class="col-md-10">
-                <h2 class="text-center" style="margin-left:20%">Vacantes</h2>
-            </div>
-            <div class="col-md-2">
-            <a href="NuevaVacante.php" class="btn btn-primary" role="button" >Nueva Vacante</a>
-            </div>
+            <?php
+            if(isset($tipo)){
+                if ($tipo == "admin"){
+                ?>
+                    <div class="class row">
+                    <div class="col-md-10">
+                        <h2 class="text-center" style="margin-left:20%">Vacantes</h2>
+                    </div>
+                    <div class="col-md-2">
+                    <a href="NuevaVacante.php" class="btn btn-primary" role="button" >Nueva Vacante</a>
+                    </div>
+                <?php }elseif($tipo == "usuario"){
+                    ?>
+                    <h2 class="text-center">Vacantes</h2>
+                    <?php
+                }
+            }else{
+                ?>
+                    <h2 class="text-center">Vacantes</h2>
+                <?php
+            }
+            ?>
         </div>
         <table class="card-table table">
             <thead>
@@ -52,38 +77,99 @@
             </thead>
             <tbody>
             <tr>
-                <td>01</td>
-                <td>Soporte Tecnico</td>
+            <?php 
+            while ($mostrar = mysqli_fetch_array($result)){
+            ?>
+                <td><?php echo $mostrar['id'] ?></td>
+                <td><?php echo $mostrar['titulo'] ?></td>
                 <td>
-                    <a class="btn primary" href="Detalles.php">
-                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
-                    <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
-                    </svg></a>
+                <?php
+                $hoy = date("Y-m-d");
+                $fecha =$mostrar['fecha_hasta'];
+                $var = $mostrar['titulo'];              // creo esta variable para enviar por a traves de la url a otra pagina
+                if (isset($tipo)){
+                    if ($hoy < $fecha or $tipo == "admin"){
+                    ?>
+                        <a class="btn primary" href="Detalles.php?var=<?php echo $var?>">                                                                <!--  en el href le agregue la variable que cree antes para mandarla a esa direccion -->
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+                        <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+                        </svg></a>
+                    <?php    
+                    }else{
+                    ?>
+                        <a class="btn disabled" href="Detalles.php">
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+                        <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+                        </svg></a>
+                        <?php    
+                    }
+                }else{
+                    if ($hoy < $fecha ){
+                        ?>
+                            <a class="btn primary" href="Detalles.php?var=<?php echo $var?>">                                                                <!--  en el href le agregue la variable que cree antes para mandarla a esa direccion -->
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+                            <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+                            </svg></a>
+                        <?php    
+                        }else{
+                        ?>
+                            <a class="btn disabled" href="Detalles.php">
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+                            <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+                            </svg></a>
+                            <?php    
+                        }
+                }
+                ?>
                 </td>
                 <td>
-                    <a class="btn primary" href="Merito.php" ><svg width="1.3em" height="1.3em" viewBox="0 0 16 16" class="bi bi-file-check" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" d="M10.854 6.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 8.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
-                    <path fill-rule="evenodd" d="M4 1h8a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2zm0 1a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H4z"/>
-                    </svg></a>
+                <?php
+        
+                $hoy = date("Y-m-d");
+                $fecha =$mostrar['fecha_hasta'];
+                if (isset($tipo)){
+                    if ($hoy >= $fecha or $tipo == "admin"){
+                    ?>
+                        <a class="btn primary" href="Merito.php" ><svg width="1.3em" height="1.3em" viewBox="0 0 16 16" class="bi bi-file-check" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M10.854 6.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 8.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+                        <path fill-rule="evenodd" d="M4 1h8a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2zm0 1a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H4z"/>
+                        </svg></a>
+                    <?php    
+                    }else{
+                    ?>
+                        <a class="btn disabled" href="Merito.php" ><svg width="1.3em" height="1.3em" viewBox="0 0 16 16" class="bi bi-file-check" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M10.854 6.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 8.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+                        <path fill-rule="evenodd" d="M4 1h8a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2zm0 1a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H4z"/>
+                        </svg></a>
+                    <?php    
+                    }
+                }else{
+                    if ($hoy >= $fecha){
+                        ?>
+                            <a class="btn primary" href="Merito.php" ><svg width="1.3em" height="1.3em" viewBox="0 0 16 16" class="bi bi-file-check" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M10.854 6.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 8.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+                            <path fill-rule="evenodd" d="M4 1h8a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2zm0 1a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H4z"/>
+                            </svg></a>
+                        <?php    
+                        }else{
+                        ?>
+                            <a class="btn disabled" href="Merito.php" ><svg width="1.3em" height="1.3em" viewBox="0 0 16 16" class="bi bi-file-check" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M10.854 6.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 8.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+                            <path fill-rule="evenodd" d="M4 1h8a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2zm0 1a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H4z"/>
+                            </svg></a>
+                        <?php    
+                        }
+                    }
+                ?>
                 </td>
             </tr>
-            <tr>
-                <td>02</td>
-                <td>Docente</td>
-                <td>
-                    <a class="btn primary" href="Detalles.php"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
-                    <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
-                    </svg></a>
-                </td>
-                <td>
-                    <a class="btn disabled" href="Merito.php" ><svg width="1.3em" height="1.3em" viewBox="0 0 16 16" class="bi bi-file-check" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" d="M10.854 6.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 8.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
-                    <path fill-rule="evenodd" d="M4 1h8a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2zm0 1a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H4z"/>
-                    </svg></a>
-                </td>
-            </tr>
+            <?php 
+            }
+            ?>
         </table>
     </div>
 </div>

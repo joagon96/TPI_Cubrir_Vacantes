@@ -1,4 +1,13 @@
-<!DOCTYPE html>
+<?php
+include "conexion.php";
+
+$titulo = ($_GET['var']);
+
+$query = "SELECT * FROM vacantes WHERE titulo = '$titulo';";
+$result = mysqli_query($link,$query);
+$infoVacante = mysqli_fetch_array($result);
+
+?>
 <html lang="en">
 <head>
     </style>
@@ -18,52 +27,47 @@
 <div class="container">
     <div class="card">
         <div class="card-header">
-            <h2 class="card-title">Soporte Tecnico</h2>
+            <h2 class="card-title"><?php echo$titulo ?></h2>
         </div>
         <div class="card-body">
             <div class="row">
                 <div class="col-md-2 text-left">Fecha Desde:</div>
-                <div class="col-md-10 text-left">03/07/2020</div>
+                <div class="col-md-10 text-left"><?php echo $infoVacante['fecha_desde']?></div>
             </div>
             <br>
             <div class="row">
                 <div class="col-md-2 text-left">Fecha Hasta:</div>
-                <div class="col-md-10 text-left">05/10/2020</div>
+                <div class="col-md-10 text-left"><?php echo $infoVacante['fecha_hasta']?></div>
             </div>
             <br>
             <div class="row">
                 <div class="col-md-2 text-left">Descripcion del puesto:</div>
                 <div class="col-md-10 text-left">
-                <p> Nombre del Puesto: Asistente del Equipo de Desarrollo y Soporte
-                    Area/Dpto: DESARROLLO Y ATENCIÓN AL CLIENTE
-                    * Asistente de Equipo de Desarrollo y Soporte *
-                    Para brindar asistencia al equipo de desarrollo y soporte, necesitamos incorporar a nuestro staff una persona con
-                    las siguientes características:
-                    - Programador Junior.
-                    - Alumno carrera Ing. Sistemas.
-                    - Conocimientos sobre conceptos de SQL y bases de datos relacionales.
-                    - Preferentemente conocimientos de desarrollo de software escritorio (Visual Basic, VisualFox) y/o web (PHP,
-                    JavaScript, Bootstrap)
-                    - Preferentemente conocimientos en manejo y/o soporte de software ERP o conocimientos sobre conceptos
-                    administrativos/contables.
-                    Lugar de Trabajo: SAN LORENZO 1333 PISO 6 OF B – ROSARIO –
-                    SANTA FE
-                    Días y horario estipulado: Lunes a Viernes de 08:30 a 12:30
+                <p> <?php echo $infoVacante['descripcion']?>
                 </p>
                 </div>
             </div>
         </div>
         <div class="card-footer">
-        <a href="Registrar.php">Enviar CV</a>
+        <?php
+        if (!isset($_SESSION['usuario'])){
+        ?>
+           <a type="button" class="btn btn-secondary" href="#" data-toggle="tooltip" data-placement="right" title="Para enviar tu Curriculum es necesario iniciar sesion">Enviar CV</a>
+        <?php
+        }else{
+        ?>
+           <a type="button" class="btn btn-primary" href="Postulacion.php?var=<?php echo $titulo?>">Enviar CV</a>
+        <?php
+        }
+        ?>
         </div>
     </div>
 </div>
 
-
 <a href="CubrirVacantes.php">Volver a Vacantes</a>
 
  <?php 
- include "Footer.php"
+ include "Footer.php";
  ?>
 
  <!-- JS, Popper.js, and jQuery -->
