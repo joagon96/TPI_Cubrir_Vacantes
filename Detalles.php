@@ -1,7 +1,13 @@
 <?php
 include "conexion.php";
 
+
+
 $titulo = ($_GET['var']);
+
+$postulado = false;     
+
+
 
 $query = "SELECT * FROM vacantes WHERE titulo = '$titulo';";
 $result = mysqli_query($link,$query);
@@ -21,7 +27,21 @@ $infoVacante = mysqli_fetch_array($result);
 <body class="text-center">
 
  <?php 
- include "Header.php"
+ include "Header.php";
+
+ $usuario = $_SESSION['usuario'];
+
+ $query2 = "SELECT * FROM postulaciones WHERE usuario ='$usuario' AND titulo = '$titulo';";
+ $result2 = mysqli_query($link, $query2);  
+
+ $filas = mysqli_num_rows($result2);
+
+ if ($filas > 0){
+    $postulado = true;
+    ?>
+    <div class="alert alert-success" role="alert">Ya te postulaste a esta vacante</div>
+    <?php
+ }
  ?>
 
 <div class="container">
@@ -50,7 +70,7 @@ $infoVacante = mysqli_fetch_array($result);
         </div>
         <div class="card-footer">
         <?php
-        if (!isset($_SESSION['usuario'])){
+        if (!isset($_SESSION['usuario']) or $postulado ){
         ?>
            <a type="button" class="btn btn-secondary" href="#" data-toggle="tooltip" data-placement="right" title="Para enviar tu Curriculum es necesario iniciar sesion">Enviar CV</a>
         <?php
