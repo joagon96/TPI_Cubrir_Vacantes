@@ -88,7 +88,7 @@ include "conexion.php";
         <button class="btn btn-lg btn-primary" type="submit" name="registrarVacante">Crear Vacante</button>
     </form>
 </div>
-
+<a href="CubrirVacantes.php">Volver a Vacantes</a>
  <?php 
  include "Footer.php"
  ?>

@@ -6,7 +6,6 @@ $titulo = ($_GET['var']);
 $postulado = false;     
 
 
-
 $query = "SELECT * FROM vacantes WHERE titulo = '$titulo';";
 $result = mysqli_query($link,$query);
 $infoVacante = mysqli_fetch_array($result);
@@ -27,18 +26,19 @@ $infoVacante = mysqli_fetch_array($result);
  <?php 
  include "Header.php";
 
- $usuario = $_SESSION['usuario'];
+if(isset($_SESSION['usuario'])){
+    $usuario = $_SESSION['usuario'];
+    $query2 = "SELECT * FROM postulaciones WHERE usuario ='$usuario' AND titulo = '$titulo';";
+    $result2 = mysqli_query($link, $query2);  
+   
+    $filas = mysqli_num_rows($result2);
 
- $query2 = "SELECT * FROM postulaciones WHERE usuario ='$usuario' AND titulo = '$titulo';";
- $result2 = mysqli_query($link, $query2);  
-
- $filas = mysqli_num_rows($result2);
-
- if ($filas > 0){
-    $postulado = true;
-    ?>
-    <div class="alert alert-success" role="alert">Ya te postulaste a esta vacante</div>
-    <?php
+    if ($filas > 0){
+        $postulado = true;
+        ?>
+        <div class="alert alert-success" role="alert">Ya te postulaste a esta vacante</div>
+        <?php
+    }
  }
  ?>
 
