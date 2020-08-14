@@ -78,7 +78,7 @@ $titulo = ($_GET['var']);
                 <label for="titulo">Presentacion:</label>
             </div>
             <div class="col-md-8">
-                <textarea type="text" name="presentacion" class="form-control"  autofocus></textarea>
+                <textarea type="text" name="presentacion" class="form-control" required autofocus></textarea>
             </div>
         </div>
         <br>
