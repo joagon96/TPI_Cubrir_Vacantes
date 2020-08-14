@@ -1,8 +1,6 @@
 <?php
 include "conexion.php";
 
-
-
 $titulo = ($_GET['var']);
 
 $postulado = false;     

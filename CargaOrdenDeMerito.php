@@ -1,4 +1,11 @@
-<!DOCTYPE html>
+<?php
+include "conexion.php";
+$titulo = ($_GET['var']);
+$usuariosRegistrados=[];
+
+
+
+?>
 <html lang="en">
 <head>
     <style>
@@ -19,11 +26,42 @@
 <body class="text-center">
 
  <?php 
- include "Header.php"
+ include "Header.php";
+
+
+ $query = "SELECT * FROM postulaciones WHERE  titulo = '$titulo';";
+ $result = mysqli_query($link, $query);  
+
+
+ if (isset($_POST['agregar'])){
+    $usuario = $_POST['usuario'];
+    $adecuacion = $_POST['adecuacion'];
+
+
+ 
+
+
+    $query2 = "INSERT INTO merito (usuario, adecuacion, titulo) VALUES ('$usuario','$adecuacion','$titulo');";
+    $result2 = mysqli_query($link, $query2);  
+
+
+    if ($result2){
+        ?>
+        <div class="alert alert-success" role="alert">Operacion Realizada Correctamente</div>
+        <?php
+    }else{
+        ?>
+        <div class="alert alert-danger" role="alert">Error en la Base de Datos, intentelo de nuevo mas tarde</div>
+        <?php
+    }
+}
+
+ 
+
  ?>
 
 <div class="container">
-    <form class="form-signin rounded" style="background-color: #e9ecef">
+    <form method="POST" class="form-signin rounded" style="background-color: #e9ecef">
         <h1 class="h3 mb-3 font-weight-normal">Orden de Merito</h1>
         <br>
         <div class="row">
@@ -31,10 +69,14 @@
                 <label for="titulo">Postulado:</label>
             </div>
             <div class="col-md-8">
-                <select class="form-control">
-                    <option>Juan Perez</option>
-                    <option>Miguel Torres</option>
-                    <option>Pedro Rodriguez</option>
+                <select name="usuario" class="form-control">
+                    <?php 
+                    while($mostrar = mysqli_fetch_array($result)){      
+                            ?>
+                            <option value="<?php echo $mostrar['usuario']?>"><?php echo $mostrar['usuario']?></option>
+                            <?php                        
+                    }
+                    ?>
                 </select>
             </div>
         </div>
@@ -44,14 +86,14 @@
                 <label for="adecuacion">Adecuacion al puesto: </label>
             </div>
             <div class="col-md-8 input-group mb-4">
-                <input type="number" id="adecuacion" class="form-control" required>
+                <input type="number" name="adecuacion" class="form-control" required>
                 <div class="input-group-append">
                     <span class="input-group-text">%</span>
                 </div>
             </div>
         </div>
         <br>
-        <button class="btn btn-lg btn-primary" type="submit">Agregar</button>
+        <button class="btn btn-lg btn-primary" type="submit" name="agregar">Agregar</button>
     </form>
 </div>
 

@@ -1,4 +1,9 @@
-<!DOCTYPE html>
+<?php
+include "conexion.php";
+$titulo = ($_GET['var']);
+
+
+?>
 <html lang="en">
 <head>
     
@@ -12,46 +17,65 @@
 <body class="text-center">
 
  <?php 
- include "Header.php"
+ include "Header.php";
+
+ if (isset($_SESSION['usuario'])){
+    $tipo = $_SESSION['tipo'];
+ }
+
+ $query = "SELECT * FROM merito WHERE  titulo = '$titulo' ORDER BY adecuacion DESC;";
+ $result = mysqli_query($link, $query);  
+ 
+
  ?>
-<h1>Orden de merito para Soporte Tecnico</h1>
+<h1>Orden de merito para <?php echo $titulo ?></h1>
 
 <div class="container">
     <div class="card">
         <div class="card-header">
-        <div class="class row">
-            <div class="col-md-10">
-                <h2 class="text-center" style="margin-left:20%">Postulados</h2>
-            </div>
-            <div class="col-md-2">
-            <a href="CargaOrdenDeMerito.php" class="btn btn-primary" role="button" >Agregar Postulados</a>
-            </div>
-        </div>
+        <?php
+            if(isset($tipo)){
+                if ($tipo == "admin"){
+                ?>
+                    <div class="class row">
+                    <div class="col-md-10">
+                        <h2 class="text-center" style="margin-left:20%">Postulados</h2>
+                    </div>
+                    <div class="col-md-2">
+                    <a href="CargaOrdenDeMerito.php?var=<?php echo $titulo?>" class="btn btn-primary" role="button" >Agregar Postulados</a>
+                    </div>
+                <?php }elseif($tipo == "usuario"){
+                    ?>
+                    <h2 class="text-center">Postulados</h2>
+                    <?php
+                }
+            }else{
+                ?>
+                    <h2 class="text-center">Postulados</h2>
+                <?php
+            }
+            ?>
         </div>
         <table class="card-table table">
             <thead>
-            <tr>
+            <tr>            
                 <th scope="col">Numero</th>
                 <th scope="col">Nombre</th>
                 <th scope="col">Adecuacion</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>01</td>
-                <td>Juan Perez</td>
-                <td>85%</td>
-            </tr>
-            <tr>
-                <td>02</td>
-                <td>Miguel Torres</td>
-                <td>70%</td>
-            </tr>
-            <tr>
-                <td>03</td>
-                <td>Pedro Rodriguez</td>
-                <td>60%</td>
-            </tr>
+                <?php 
+                while ($mostrar = mysqli_fetch_array($result)){
+                ?>
+                <tr>
+                    <td><?php echo $mostrar['id']?></td>
+                    <td><?php echo $mostrar['usuario']?></td>
+                    <td><?php echo $mostrar['adecuacion']?>%</td>
+                </tr>
+                <?php
+                }
+                ?>
         </table>
     </div>
 </div>
