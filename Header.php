@@ -19,7 +19,7 @@ if (isset($_SESSION['usuario'])){
           ?>
             <ul class="navbar-nav " >
               <li  class="nav-item">
-                  <a class="nav-link" href="Iniciar sesion.php">Iniciar Sesion</a>
+                  <a class="nav-link" href="IniciarSesion.php">Iniciar Sesion</a>
               </li>
               <li  class="nav-item">
                   <a class="nav-link" href="Registrar.php">Registrar</a>

@@ -24,7 +24,7 @@ include "Header.php"
       </div>
     </div>
     <div class="col-md-4">
-      <div class="container" style="height:100%; background-color: #e9ecef" height="100%">
+      <div class="container" style="background-color: #e9ecef" height="100%">
         <h2>Convocatoria Programa UTN DAAD 2022</h2>
         <p style="text-align:center" ><img src="https://www.frro.utn.edu.ar/fotonoticias/100001222_convocatoria-daad2022.jpeg" alt="" width="70%"></p>
         <br>
@@ -33,7 +33,7 @@ include "Header.php"
       </div>
     </div>
     <div class="col-md-4 ">
-      <div class="container" style="height:100%; background-color: #e9ecef" height="100%">
+      <div class="container" style="background-color: #e9ecef" height="100%">
         <h2>Talleres a distancia</h2>
         <p>UNIVERSIDAD TECNOLÓGICA NACIONAL Facultad Regional Rosario Secretaría de Cultura y Extensión Universitaria </p>
         <p>Programa de Capacitación 2020</p>
