@@ -86,32 +86,60 @@ if (isset($_SESSION['usuario'])){
                 <?php
                 $hoy = date("Y-m-d");
                 $fecha =$mostrar['fecha_hasta'];
-                $var = $mostrar['titulo'];              // creo esta variable para enviar por a traves de la url a otra pagina
-                if (isset($tipo)){
-                    if ($hoy < $fecha or $tipo == "admin"){
-                    ?>
-                        <a class="btn primary" style=" margin-left: 1%; display: flex;" href="Detalles.php?var=<?php echo $var?>">
-                        <!--  en el href le agregue la variable que cree antes para mandarla a esa direccion -->
-                        <button type="button" class="btn btn-primary">
-                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
-                            <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
-                        </svg>
-                        Inscribir Nuevo </button></a>
-                    <?php    
-                    }else{
-                    ?>
-                        <a class="btn disabled" href="Detalles.php">
-                        <button type="button" class="btn btn-secondary">
-                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
-                            <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
-                        </svg>
-                        Vacante Cerrada </button></a>
-                        <?php    
+                $var = $mostrar['titulo'];     // creo esta variable para enviar por a traves de la url a otra pagina
+                if (isset($tipo)){    //Si se inicio una sesion
+                    if ($hoy < $fecha){    //Si la vacante esta vigente
+                        if ($tipo == "admin"){    //Si entro con una cuenta de admin
+                        ?>
+                            <a class="btn primary" style=" margin-left: 1%; display: flex;" href="Detalles.php?var=<?php echo $var?>">
+                            <!--  en el href le agregue la variable que cree antes para mandarla a esa direccion -->
+                            <button type="button" class="btn btn-primary">
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+                                <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+                            </svg>
+                            Editar Vacante </button></a>
+                        <?php
+                        }
+                        else{    //Si entro con un usuario comun
+                            ?>
+                                <a class="btn primary" style=" margin-left: 5%; display: flex;" href="Detalles.php?var=<?php echo $var?>">
+                                <button type="button" class="btn btn-primary">
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+                                    <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+                                </svg>
+                                Inscribirme </button></a>
+                            <?php    
+                        }
                     }
-                }else{
-                    if ($hoy < $fecha ){
+                    else{     //Si la vacante ya cerro
+                        if ($tipo == "admin"){      //Y entro con cuenta admin
+                        ?>
+                            <a class="btn primary" style=" margin-left: -7%; display: flex;" href="Detalles.php?var=<?php echo $var?>">
+                            <!--  en el href le agregue la variable que cree antes para mandarla a esa direccion -->
+                            <button type="button" class="btn btn-info">
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+                                <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+                            </svg>
+                            Editar Vacante Cerrada </button></a>
+                            <?php
+                        }
+                        else{     //Entro con cuenta usuario
+                            ?>
+                                <a class="btn disabled" href="Detalles.php">
+                                <button type="button" class="btn btn-secondary">
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+                                    <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+                                </svg>
+                                Vacante Cerrada </button></a>
+                                <?php
+                            }
+                    }
+                }else{     //Si no se inicio sesion
+                    if ($hoy < $fecha ){     //Y la vacante esta abierta
                         ?>
                             <a class="btn primary" style=" margin-left: 10%; display: flex;" href="Detalles.php?var=<?php echo $var?>">
                             <!--  en el href le agregue la variable que cree antes para mandarla a esa direccion -->
@@ -122,7 +150,7 @@ if (isset($_SESSION['usuario'])){
                             </svg>
                             Detalles </button></a>
                         <?php    
-                        }else{
+                        }else{    //Y la vacante cerro
                         ?>
                             <a class="btn disabled" href="Detalles.php">
                             <button type="button" class="btn btn-secondary">
