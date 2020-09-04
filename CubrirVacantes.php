@@ -86,9 +86,9 @@ if (isset($_SESSION['usuario'])){
                 <?php
                 $hoy = date("Y-m-d");
                 $fecha =$mostrar['fecha_hasta'];
-                $var = $mostrar['titulo'];     // creo esta variable para enviar por a traves de la url a otra pagina
+                $var = $mostrar['id'];     // creo esta variable para enviar por a traves de la url a otra pagina
                 if (isset($tipo)){    //Si se inicio una sesion
-                    if ($hoy < $fecha){    //Si la vacante esta vigente
+                    if ($hoy <= $fecha){    //Si la vacante esta vigente
                         if ($tipo == "admin"){    //Si entro con una cuenta de admin
                         ?>
                             <a class="btn primary" style=" margin-left: 1%; display: flex;" href="Detalles.php?var=<?php echo $var?>">
@@ -139,7 +139,7 @@ if (isset($_SESSION['usuario'])){
                             }
                     }
                 }else{     //Si no se inicio sesion
-                    if ($hoy < $fecha ){     //Y la vacante esta abierta
+                    if ($hoy <= $fecha ){     //Y la vacante esta abierta
                         ?>
                             <a class="btn primary" style=" margin-left: 10%; display: flex;" href="Detalles.php?var=<?php echo $var?>">
                             <!--  en el href le agregue la variable que cree antes para mandarla a esa direccion -->
@@ -170,7 +170,7 @@ if (isset($_SESSION['usuario'])){
                 $hoy = date("Y-m-d");
                 $fecha =$mostrar['fecha_hasta'];
                 if (isset($tipo)){
-                    if ($hoy >= $fecha or $tipo == "admin"){
+                    if ($hoy > $fecha or $tipo == "admin"){
                     ?>
                         <a class="btn primary" href="Merito.php?var=<?php echo $var?>">
                         <button type="button" class="btn btn-primary">
@@ -192,7 +192,7 @@ if (isset($_SESSION['usuario'])){
                     <?php    
                     }
                 }else{
-                    if ($hoy >= $fecha){
+                    if ($hoy > $fecha){
                         ?>
                             <a class="btn primary" href="Merito.php?var=<?php echo $var?>">
                             <button type="button" class="btn btn-primary">

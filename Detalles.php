@@ -1,12 +1,12 @@
 <?php
 include "conexion.php";
 
-$titulo = ($_GET['var']);
+$id = ($_GET['var']);
 
 $postulado = false;     
 
 
-$query = "SELECT * FROM vacantes WHERE titulo = '$titulo';";
+$query = "SELECT * FROM vacantes WHERE id = '$id';";
 $result = mysqli_query($link,$query);
 $infoVacante = mysqli_fetch_array($result);
 
@@ -28,7 +28,7 @@ $infoVacante = mysqli_fetch_array($result);
 
 if(isset($_SESSION['usuario'])){
     $usuario = $_SESSION['usuario'];
-    $query2 = "SELECT * FROM postulaciones WHERE usuario ='$usuario' AND titulo = '$titulo';";
+    $query2 = "SELECT * FROM postulaciones WHERE usuario ='$usuario' AND id = '$id';";
     $result2 = mysqli_query($link, $query2);  
    
     $filas = mysqli_num_rows($result2);
@@ -45,7 +45,17 @@ if(isset($_SESSION['usuario'])){
 <div class="container">
     <div class="card">
         <div class="card-header">
-            <h2 class="card-title"><?php echo$titulo ?></h2>
+            <h2 class="card-title"><?php echo$infoVacante['titulo']?>
+            <?php
+            if(isset($usuario)){
+                if ($usuario == "admin" or $usuario == "jefe"){    //Si el usuario es un admin o jefe activamos los botones de modificar y eliminar
+                ?>
+                <a href="EditarVacante.php?acc=Modificar&var=<?php echo $id?>" class="btn btn-primary" role="button" style="float:right">Modificar</a>
+                <a href="EditarVacante.php?acc=Eliminar&var=<?php echo $id?>" class="btn btn-danger" role="button" style="float:right; margin-right:10px">Eliminar</a>
+                <?php
+                }
+            }?>
+            </h2>
         </div>
         <div class="card-body">
             <div class="row">
@@ -74,7 +84,7 @@ if(isset($_SESSION['usuario'])){
         <?php
         }else{
         ?>
-           <a type="button" class="btn btn-primary" href="Postulacion.php?var=<?php echo $titulo?>">Enviar CV</a>
+           <a type="button" class="btn btn-primary" href="Postulacion.php?var=<?php echo $infoVacante['titulo']?>">Enviar CV</a>
         <?php
         }
         ?>
