@@ -68,6 +68,7 @@ include_once "conexion.php";
         <?php
     }
 }
+include "obligatorios.html";
  ?>
 
 
@@ -75,15 +76,65 @@ include_once "conexion.php";
 <div class="container">
     <form  method="POST" class="form-signin rounded" style="background-color: #e9ecef">
         <h1 class="h3 mb-3 font-weight-normal">Crear Cuenta</h1>
+        <div class="row">
+            <div class="col-md-10">
+                <label for="nombre" class="sr-only">Nombre</label>
+                <input type="text" name="nombre" class="form-control" placeholder="Nombre" required autofocus>
+            </div>   
+            <div class="col-md-2">
+                <p style="color:red">*</p>
+            </div> 
+        </div>
         <br>
-        <label for="usuario" class="sr-only">Usuario</label>
-        <input type="text" name="usuario" class="form-control" placeholder="Usuario" required autofocus>
+        <div class="row">
+            <div class="col-md-10">
+                <label for="apellido" class="sr-only">Apellido</label>
+                <input type="text" name="apellido" class="form-control" placeholder="Apellido" required autofocus>
+            </div>   
+            <div class="col-md-2">
+                <p style="color:red">*</p>
+            </div> 
+        </div>
         <br>
-        <label for="email" class="sr-only">Email</label>
-        <input type="email" name="email" class="form-control" placeholder="Direccion e-mail" required autofocus>
+        <div class="row">
+            <div class="col-md-10">
+                <label for="telefono" class="sr-only">Telefono</label>
+                <input type="text" name="telefono" class="form-control" placeholder="Telefono" required autofocus>
+            </div>   
+            <div class="col-md-2">
+                <p style="color:red">*</p>
+            </div> 
+        </div> 
         <br>
+        <div class="row">
+            <div class="col-md-10">
+                <label for="email" class="sr-only">Email</label>
+                <input type="email" name="email" class="form-control" placeholder="Direccion e-mail" required autofocus>
+            </div>   
+            <div class="col-md-2">
+                <p style="color:red">*</p>
+            </div> 
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-10">
+                <label for="usuario" class="sr-only">Usuario</label>
+                <input type="text" name="usuario" class="form-control" placeholder="Usuario" required autofocus>
+            </div>   
+            <div class="col-md-2">
+                <p style="color:red">*</p>
+            </div> 
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-10">
         <label for="contraseña" class="sr-only">Contraseña</label>
         <input type="password" name="contraseña" class="form-control" placeholder="Contraseña" required>
+        </div>   
+            <div class="col-md-2">
+                <p style="color:red">*</p>
+            </div> 
+        </div>
         <br>
         <button class="btn btn-lg btn-primary btn-block" type="submit" name="registrar">Crear Cuenta</button>
     </form>
