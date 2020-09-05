@@ -1,6 +1,5 @@
 <?php include_once "conexion.php"; ?>
 
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <style>
@@ -16,40 +15,45 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar Sesion</title>
+    <title>Contacto</title>
 </head>
 <body class="text-center">
 
  <?php include "Header.php";
- if (isset($_POST['iniciar'])){
-    $usuario = $_POST['usuario'];
-    $contraseña = $_POST['contraseña'];
-    $query = "SELECT * FROM usuarios WHERE usuario ='$usuario' AND contraseña = '$contraseña';";
-    $result = mysqli_query($link, $query);
-    $filas = mysqli_num_rows($result);
-    if ($filas > 0){
-      $extraido = mysqli_fetch_array($result);
-      $activado = $extraido['activado'];
-      if ($activado) {
-        session_start();
-        $_SESSION['tipo'] = $extraido['tipo'];
-        $_SESSION['usuario'] = $usuario;
-        header("Location:Home.php");
-      } else { echo $activado; ?><div class="alert alert-danger" role="alert">Active su cuenta por favor</div><?php }
-    } else { ?><div class="alert alert-danger" role="alert">Usuario y/o contraseña incorrecto</div><?php }
- }?>
+ if (isset($_POST['enviar'])){
+   if (isset($_SESSION['usuario'])) {
+     $consulta = $_POST['consulta'];
+     $usuario = $_SESSION['usuario'];
+     $query = "SELECT * FROM usuarios WHERE usuario ='$usuario';";
+     $result = mysqli_query($link, $query);
+     $extraido = mysqli_fetch_array($result);
+     $email = $extraido['email'];
+     $asunto = 'Consulta';
+     $cabeceras  = 'MIME-Version: 1.0' . "\r\n";
+     $cabeceras .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+     $cabeceras .= 'From: '. $email . "\r\n";
+     $cuerpo = '
+     <html>
+     <head>
+     <title>Consulta de '.$usuario.':</title>
+     </head>
+     <body>
+     <p>'.$consulta.'</p>
+     </body>
+     </html>
+     ';
+     mail($email,$asunto,$cuerpo,$cabeceras);
+   } else { ?><div class="alert alert-danger" role="alert">Inicie sesión para enviar consulta.</div><?php }
+   }?>
 
 <div class="container">
     <form method="POST" class="form-signin rounded" style="background-color: #e9ecef">
-        <h1 class="h3 mb-3 font-weight-normal">Ingrese sus datos</h1>
+        <h1 class="h3 mb-3 font-weight-normal">Ingrese su consulta:</h1>
         <br>
-        <label for="usuario" class="sr-only">Usuario</label>
-        <input type="text" name="usuario" class="form-control" placeholder="Usuario" required autofocus>
+        <label for="consulta" class="sr-only">Consulta:</label>
+        <textarea id="consulta" name="consulta" class="form-control" placeholder="Consulta" required autofocus></textarea>
         <br>
-        <label for="contraseña" class="sr-only">Contraseña</label>
-        <input type="password" name="contraseña" class="form-control" placeholder="Contraseña" required>
-        <br>
-        <button class="btn btn-lg btn-primary btn-block" type="submit" name="iniciar">Iniciar sesion</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" name="enviar">Enviar Consulta</button>
     </form>
 </div>
 
