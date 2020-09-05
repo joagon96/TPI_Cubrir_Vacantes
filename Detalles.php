@@ -35,7 +35,7 @@ if(isset($_SESSION['usuario'])){
     $idUsu = mysqli_fetch_object($resultIdUsu)->id;//Devuelvo un objeto y accedo a su propiedad id
 
     //Ahora con el ID del usuario veo si esta postulado
-    $query2 = "SELECT * FROM postulaciones WHERE id_usuario ='$idUsu' AND id = '$id';";
+    $query2 = "SELECT * FROM postulaciones WHERE id_usuario ='$idUsu' AND id_vacante = '$id';";
     $result2 = mysqli_query($link, $query2);
    
     $filas = mysqli_num_rows($result2);
