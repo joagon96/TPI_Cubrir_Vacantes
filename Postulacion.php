@@ -37,10 +37,16 @@ include "Header.php";
  
 $usuario = $_SESSION['usuario'];
 //Obtengo el ID del usuario en base a su nombre
-$queryIdUsu = "SELECT id FROM usuarios WHERE usuario ='$usuario';";
-$resultIdUsu = mysqli_query($link, $queryIdUsu);
-$idUsu = mysqli_fetch_object($resultIdUsu)->id;//Devuelvo un objeto y accedo a su propiedad id
-
+$queryIdUsu = "SELECT * FROM usuarios WHERE usuario ='$usuario';";
+//$resultIdUsu = mysqli_query($link, $queryIdUsu);
+//$idUsu = mysqli_fetch_object($resultIdUsu)->id;//Devuelvo un objeto y accedo a su propiedad id
+$resultUsu = mysqli_query($link, $queryIdUsu);
+$usuActual = mysqli_fetch_array($resultUsu);
+$idUsu = $usuActual['id'];
+$nombre = $usuActual['nombre'];
+$apellido = $usuActual['apellido'];
+$email = $usuActual['email'];
+$telefono = $usuActual['telefono'];
 
 $query2 = "SELECT * FROM postulaciones WHERE id_usuario ='$idUsu' AND id_vacante = '$id';";
 $result2 = mysqli_query($link, $query2);  
@@ -56,14 +62,17 @@ if ($filas > 0){
 
 $formatos = array('.doc','.pdf','.docx');
 if (isset($_POST['postular'])){
-     $pretension = $_POST['pretension'];
+     $nombre = $_POST['nombre'];
+     $apellido = $_POST['apellido'];
+     $telefono = $_POST['telefono'];
+     $email = $_POST['email'];
      $nombreArchivo = $_FILES['cv']['name'];
      $nombreArchivoTemp = $_FILES['cv']['tmp_name'];
      $ext = substr($nombreArchivo, strrpos($nombreArchivo, '.'));
      if (in_array($ext, $formatos)){
             if(move_uploaded_file($nombreArchivoTemp, "CVS/$nombreArchivo")){
 
-                $query = "INSERT INTO postulaciones (id_usuario, id_vacante, pretension_salarial) VALUES ('$idUsu','$id','$pretension');";
+                $query = "INSERT INTO postulaciones (id_usuario, id_vacante, nombre, apellido, telefono, email) VALUES ('$idUsu','$id','$nombre', '$apellido','$telefono','$email');";
                 $result = mysqli_query($link, $query); 
 
                 if ($result){
@@ -82,28 +91,43 @@ if (isset($_POST['postular'])){
     <form method="POST" class="form-signin rounded" style="background-color: #e9ecef" enctype="multipart/form-data">
         <h1 class="h3 mb-3 font-weight-normal">Postulacion para <?php echo $infoVacante['titulo'] ?></h1>
         <div class="row">
-            <div class="col-md-4">
-                <label for="titulo">Presentacion:</label>
+            <div class="col-md-4 text-right">
+                <label for="nombre">Nombre:</label>
             </div>
             <div class="col-md-8">
-                <textarea type="text" name="presentacion" class="form-control" required autofocus></textarea>
+                <input type="text" name="nombre" value="<?php echo $nombre?>" class="form-control" required autofocus>
             </div>
         </div>
         <br>
         <div class="row">
-            <div class="col-md-4">
-                <label for="fechaDesde">Pretension Salarial:</label>
+            <div class="col-md-4 text-right">
+                <label for="apellido">Apellido:</label>
             </div>
-            <div class="col-md-8 input-group mb-4">
-                <input type="number" name="pretension" class="form-control" required>
-                <div class="input-group-append">
-                    <span class="input-group-text">$</span>
-                </div>
+            <div class="col-md-8">
+                <input type="text" name="apellido" value="<?php echo $apellido?>" class="form-control" required>
             </div>
         </div>
         <br>
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-4 text-right">
+                <label for="apellido">Telefono:</label>
+            </div>
+            <div class="col-md-8">
+                <input type="number" name="telefono" value="<?php echo $telefono?>" class="form-control" required>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-4 text-right">
+                <label for="apellido">Email:</label>
+            </div>
+            <div class="col-md-8">
+                <input type="text" name="email" value="<?php echo $email?>" class="form-control" required>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-4 text-right">
                 <label for="cv">Curriculum:</label>
             </div>
             <div class="col-md-8">
