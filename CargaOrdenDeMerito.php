@@ -7,6 +7,14 @@ $infoVacante = mysqli_fetch_array($result);
 
 $usuariosRegsitrados=[];
 
+session_start();
+if (isset($_SESSION['usuario'])) {
+    $usuario = $_SESSION['usuario'];
+    if ($usuario !="admin" and $usuario !="jefe"){
+        header("location: ./Page404.html");}}
+else{
+    header("location: ./Page404.html");}
+
 ?>
 <html lang="en">
 <head>
