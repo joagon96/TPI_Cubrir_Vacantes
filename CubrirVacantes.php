@@ -70,7 +70,7 @@ if (isset($_SESSION['usuario'])){
             <thead>
             <tr>
                 <th scope="col">Numero</th>
-                <th scope="col">Titulo</th>
+                <th scope="col">Titulo de la Vacante</th>
                 <th scope="col" style="padding-left: 7%;">Detalle</th>
                 <th scope="col" style="padding-left: 3%;">Orden de Merito</th>
             </tr>

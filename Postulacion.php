@@ -59,7 +59,7 @@ $titulo = ($_GET['var']);
                 $result = mysqli_query($link, $query); 
 
                 if ($result){
-                    header("Location:Detalles.php?var=$titulo");
+                    header("Location:Detalles.php?var=$id");
                 }else{
                     ?>
                     <div class="alert alert-danger" role="alert">Error en la Base de Datos, intentelo de nuevo mas tarde</div>

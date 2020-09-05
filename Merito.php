@@ -35,7 +35,7 @@ $titulo = ($_GET['var']);
         <div class="card-header">
         <?php
             if(isset($tipo)){
-                if ($tipo == "admin"){
+                if ($tipo == "admin" or $tipo == "jefe"){
                 ?>
                     <div class="class row">
                     <div class="col-md-10">
