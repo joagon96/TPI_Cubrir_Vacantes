@@ -1,6 +1,10 @@
 <?php
 include "conexion.php";
-$titulo = ($_GET['var']);
+$id = ($_GET['var']);
+$query = "SELECT * FROM vacantes WHERE id = '$id';";
+$result = mysqli_query($link,$query);
+$infoVacante = mysqli_fetch_array($result);
+
 $usuariosRegsitrados=[];
 
 ?>
@@ -29,26 +33,31 @@ $usuariosRegsitrados=[];
 </head>
 <body class="text-center">
 
- <?php 
- include "Header.php";
+<?php 
+include "Header.php";
 
 
- $query = "SELECT * FROM postulaciones WHERE  titulo = '$titulo';";
- $result = mysqli_query($link, $query);  
+$query = "SELECT * FROM postulaciones INNER JOIN usuarios ON postulaciones.id_usuario = usuarios.id WHERE id_vacante = '$id';";
+$result = mysqli_query($link, $query);  
 
 
- if (isset($_POST['agregar'])){
+if (isset($_POST['agregar'])){
     $usuario = $_POST['usuario'];
     $adecuacion = $_POST['adecuacion'];
 
-    $query3 = "SELECT * FROM merito WHERE  usuario='$usuario' and titulo = '$titulo';";
+    //Obtengo el ID del usuario en base a su nombre
+    $queryIdUsu = "SELECT id FROM usuarios WHERE usuario ='$usuario';";
+    $resultIdUsu = mysqli_query($link, $queryIdUsu);
+    $idUsu = mysqli_fetch_object($resultIdUsu)->id;//Devuelvo un objeto y accedo a su propiedad id
+
+    $query3 = "SELECT * FROM merito INNER JOIN usuarios ON merito.id_usuario = usuarios.id WHERE usuarios.usuario='$usuario' and merito.id_vacante = '$id';";
     $result3 = mysqli_query($link, $query3);
     $filas = mysqli_num_rows($result3);
 
 
     if($filas == 0){
 
-        $query2 = "INSERT INTO merito (usuario, adecuacion, titulo) VALUES ('$usuario','$adecuacion','$titulo');";
+        $query2 = "INSERT INTO merito (id_usuario, adecuacion, id_vacante) VALUES ('$idUsu','$adecuacion','$id');";
         $result2 = mysqli_query($link, $query2);  
 
         
@@ -68,8 +77,8 @@ $usuariosRegsitrados=[];
     }
 }
 
- ?>
-<h1 class="h2 mb-3 font-weight-normal">Registro de Orden de Merito para <?php echo $titulo?></h1>
+?>
+<h1 class="h2 mb-3 font-weight-normal">Registro de Orden de Merito para <?php echo $infoVacante['titulo']?></h1>
 <div class="row">
     <div class="container col-md-6">
         <form method="POST" class="form-signin rounded" style=" background-color: #e9ecef">
@@ -114,7 +123,7 @@ $usuariosRegsitrados=[];
             <div class="col-md-8" style="text-align:left">
             <h1 class="h3 mb-3 font-weight-normal">Usuarios ya registrados</h1>
             <?php 
-            $query4 = "SELECT * FROM merito WHERE titulo = '$titulo';";
+            $query4 = "SELECT * FROM merito INNER JOIN usuarios ON merito.id_usuario = usuarios.id WHERE id_vacante = '$id';";
             $result4 = mysqli_query($link, $query4);
 
             while ($datos = mysqli_fetch_array($result4)){
@@ -130,7 +139,7 @@ $usuariosRegsitrados=[];
     </div>
     </div>
 </div>
-<a href="Merito.php?var=<?php echo $titulo?>">Volver a Orden de Merito</a>
+<a href="Merito.php?var=<?php echo $id?>">Volver a Orden de Merito</a>
 
  <?php 
  include "Footer.php"

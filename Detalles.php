@@ -28,11 +28,19 @@ $infoVacante = mysqli_fetch_array($result);
 
 if(isset($_SESSION['usuario'])){
     $usuario = $_SESSION['usuario'];
-    $query2 = "SELECT * FROM postulaciones WHERE usuario ='$usuario' AND id = '$id';";
-    $result2 = mysqli_query($link, $query2);  
+    
+    //Obtengo el ID del usuario en base a su nombre
+    $queryIdUsu = "SELECT id FROM usuarios WHERE usuario ='$usuario';";
+    $resultIdUsu = mysqli_query($link, $queryIdUsu);
+    $idUsu = mysqli_fetch_object($resultIdUsu)->id;//Devuelvo un objeto y accedo a su propiedad id
+
+    //Ahora con el ID del usuario veo si esta postulado
+    $query2 = "SELECT * FROM postulaciones WHERE id_usuario ='$idUsu' AND id = '$id';";
+    $result2 = mysqli_query($link, $query2);
    
     $filas = mysqli_num_rows($result2);
 
+    //Si esta postulado le aviso
     if ($filas > 0){
         $postulado = true;
         ?>
@@ -84,7 +92,7 @@ if(isset($_SESSION['usuario'])){
         <?php
         }else{
         ?>
-           <a type="button" class="btn btn-primary" href="Postulacion.php?var=<?php echo $infoVacante['titulo']?>">Enviar CV</a>
+           <a type="button" class="btn btn-primary" href="Postulacion.php?var=<?php echo $id?>">Enviar CV</a>
         <?php
         }
         ?>

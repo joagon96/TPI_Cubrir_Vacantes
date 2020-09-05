@@ -1,7 +1,10 @@
 <?php
 include "conexion.php";
-$titulo = ($_GET['var']);
+$id = ($_GET['var']);
 
+$query = "SELECT * FROM vacantes WHERE id = '$id';";
+$result = mysqli_query($link,$query);
+$infoVacante = mysqli_fetch_array($result);
 
 ?>
 <html lang="en">
@@ -23,15 +26,15 @@ $titulo = ($_GET['var']);
     $tipo = $_SESSION['tipo'];
  }
 
- $query = "SELECT * FROM merito WHERE  titulo = '$titulo' ORDER BY adecuacion DESC;";
+ $query = "SELECT * FROM merito INNER JOIN usuarios ON merito.id_usuario = usuarios.id WHERE merito.id_vacante = '$id' ORDER BY adecuacion DESC;";
  $result = mysqli_query($link, $query);  
  
 
  ?>
-<h1>Orden de merito para <?php echo $titulo ?></h1>
+<h1>Orden de merito para <?php echo $infoVacante['titulo'] ?></h1>
 
 <div class="container">
-    <div class="card">
+    <div class="card text-center">
         <div class="card-header">
         <?php
             if(isset($tipo)){
@@ -42,7 +45,7 @@ $titulo = ($_GET['var']);
                         <h2 class="text-center" style="margin-left:20%">Postulados</h2>
                     </div>
                     <div class="col-md-2">
-                    <a href="CargaOrdenDeMerito.php?var=<?php echo $titulo?>" class="btn btn-primary" role="button" >Agregar Postulados</a>
+                    <a href="CargaOrdenDeMerito.php?var=<?php echo $id?>" class="btn btn-primary" role="button" >Agregar Postulados</a>
                     </div>
                 <?php }elseif($tipo == "usuario"){
                     ?>

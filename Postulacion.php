@@ -5,8 +5,11 @@ $postulado = false;
 
 session_start();
 
+$id = ($_GET['var']);
 
-$titulo = ($_GET['var']);
+$query = "SELECT * FROM vacantes WHERE id = '$id';";
+$result = mysqli_query($link,$query);
+$infoVacante = mysqli_fetch_array($result);
 
 ?>
 <html lang="en">
@@ -28,26 +31,31 @@ $titulo = ($_GET['var']);
 </head>
 <body class="text-center">
 
- <?php 
- include "Header.php";
+<?php 
+include "Header.php";
 
  
- $usuario = $_SESSION['usuario'];
+$usuario = $_SESSION['usuario'];
+//Obtengo el ID del usuario en base a su nombre
+$queryIdUsu = "SELECT id FROM usuarios WHERE usuario ='$usuario';";
+$resultIdUsu = mysqli_query($link, $queryIdUsu);
+$idUsu = mysqli_fetch_object($resultIdUsu)->id;//Devuelvo un objeto y accedo a su propiedad id
 
- $query2 = "SELECT * FROM postulaciones WHERE usuario ='$usuario' AND titulo = '$titulo';";
- $result2 = mysqli_query($link, $query2);  
 
- $filas = mysqli_num_rows($result2);
+$query2 = "SELECT * FROM postulaciones WHERE id_usuario ='$idUsu' AND id_vacante = '$id';";
+$result2 = mysqli_query($link, $query2);  
 
- if ($filas > 0){
+$filas = mysqli_num_rows($result2);
+
+if ($filas > 0){
     $postulado = true;
     ?>
     <div class="alert alert-success" role="alert">Ya te postulaste a esta vacante</div>
     <?php
- }
+}
 
- $formatos = array('.doc','.pdf','.docx');
- if (isset($_POST['postular'])){
+$formatos = array('.doc','.pdf','.docx');
+if (isset($_POST['postular'])){
      $pretension = $_POST['pretension'];
      $nombreArchivo = $_FILES['cv']['name'];
      $nombreArchivoTemp = $_FILES['cv']['tmp_name'];
@@ -55,7 +63,7 @@ $titulo = ($_GET['var']);
      if (in_array($ext, $formatos)){
             if(move_uploaded_file($nombreArchivoTemp, "CVS/$nombreArchivo")){
 
-                $query = "INSERT INTO postulaciones (usuario, titulo, pretension_salarial) VALUES ('$usuario','$titulo','$pretension');";
+                $query = "INSERT INTO postulaciones (id_usuario, id_vacante, pretension_salarial) VALUES ('$idUsu','$id','$pretension');";
                 $result = mysqli_query($link, $query); 
 
                 if ($result){
@@ -68,11 +76,11 @@ $titulo = ($_GET['var']);
             }
         }
     }
- ?>
+?>
 
 <div class="container">
     <form method="POST" class="form-signin rounded" style="background-color: #e9ecef" enctype="multipart/form-data">
-        <h1 class="h3 mb-3 font-weight-normal">Postulacion para <?php echo $titulo ?></h1>
+        <h1 class="h3 mb-3 font-weight-normal">Postulacion para <?php echo $infoVacante['titulo'] ?></h1>
         <div class="row">
             <div class="col-md-4">
                 <label for="titulo">Presentacion:</label>
