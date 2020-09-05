@@ -1,5 +1,5 @@
 <?php
-include_once "conexion.php"; 
+include_once "conexion.php";
 ?>
 
 <html lang="en">
@@ -14,14 +14,14 @@ include_once "conexion.php";
     </style>
     <!-- CSS only -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crear Cuenta</title>
 </head>
 <body class="text-center">
 
- <?php 
+ <?php
  include "Header.php";
 
  if (isset($_POST['registrar'])){
@@ -30,28 +30,41 @@ include_once "conexion.php";
     $contraseña = $_POST['contraseña'];
     $tipo = 'usuario';
 
-    $query1 = "SELECT * FROM usuarios WHERE usuario ='$usuario'";
-    $result1 = mysqli_query($link, $query1); 
+    $query1 = "SELECT * FROM usuarios WHERE usuario ='$usuario' OR email = '$email'";
+    $result1 = mysqli_query($link, $query1);
     $filasq1 = mysqli_num_rows($result1);
 
     if ($filasq1 == 0){
         $query2 = "INSERT INTO usuarios (usuario, email, contraseña, tipo) VALUES ('$usuario','$email','$contraseña','$tipo');";
 
-        $result2 = mysqli_query($link, $query2);  
+        $result2 = mysqli_query($link, $query2);
 
         if ($result2){
-            session_start();
-            $_SESSION['usuario'] = $usuario;
-            $_SESSION['tipo'] = $tipo;
-            header("Location:Home.php");
+          $asunto = 'Confirmación de cuenta';
+          $cabeceras  = 'MIME-Version: 1.0' . "\r\n";
+          $cabeceras .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+          $cuerpo = '
+<html>
+<head>
+  <title>Mail de confirmación UTN FrRo</title>
+</head>
+<body>
+  <p>Confirme su cuenta con el siguiente link: </p>
+  <a href="https://tpi-cubrir-vacantes-g8-1c2020.000webhostapp.com/TP/Activar.php?code='.$email.'">Confirmar</a>
+</body>
+</html>
+';
+            mail($email,$asunto,$cuerpo,$cabeceras);
+//            session_start();
+//            $_SESSION['usuario'] = $usuario;
+//            $_SESSION['tipo'] = $tipo;
+            ?> <div class="alert alert-success" role="alert">Cuenta creada, verifique su casilla para confirmar el registro</div> <?php
         }else{
-            ?>
-            <div class="alert alert-danger" role="alert">Error en la Base de Datos, intentelo de nuevo mas tarde</div>
-            <?php
+            ?> <div class="alert alert-danger" role="alert">Error en la Base de Datos, intentelo de nuevo mas tarde</div> <?php
         }
     }else{
         ?>
-        <div class="alert alert-danger" role="alert">El usuario ingresado ya existe, ingrese uno diferente</div>
+        <div class="alert alert-danger" role="alert">El usuario o email ingresado ya existe, ingrese uno diferente</div>
         <?php
     }
 }
@@ -78,7 +91,7 @@ include_once "conexion.php";
 
 
 
- <?php 
+ <?php
  include "Footer.php"
  ?>
 

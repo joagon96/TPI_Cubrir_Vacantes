@@ -4,7 +4,7 @@ if (isset($_SESSION['usuario'])){
   $usu = $_SESSION['usuario'];
 }
 ?>
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark"> 
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
@@ -31,11 +31,12 @@ if (isset($_SESSION['usuario'])){
                 <li  class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropDown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php echo $usu ?></a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="EditarPerfil.php">Editar Perfil</a>
                       <a class="dropdown-item" href="CerrarSesion.php">Cerrar Sesion</a>
                     </div>
                 </li>
               </ul>
-          <?php  
+          <?php
           } ?>
         </div>
 </nav>
@@ -46,4 +47,3 @@ if (isset($_SESSION['usuario'])){
     <img class="img-fluid" src="img/imagenutn.png" alt="">
   </div>
 </div>
-  
