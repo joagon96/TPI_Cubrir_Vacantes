@@ -84,20 +84,28 @@ if (isset($_POST['agregar'])){
         <?php
     }
 }
-
 ?>
 <h1 class="h2 mb-3 font-weight-normal">Registro de Orden de Merito para <?php echo $infoVacante['titulo']?></h1>
+
+<?php
+?>
+<div class="text-left" style="margin-left:12%">
+<?php
+    include "obligatorios.html";
+?>
+</div>
+
 <div class="row">
     <div class="container col-md-6">
         <form method="POST" class="form-signin rounded" style=" background-color: #e9ecef">
             <h1 class="h3 mb-3 font-weight-normal">Orden de Merito</h1>
             <br>
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <label for="titulo">Postulado:</label>
                 </div>
                 <div class="col-md-8">
-                    <select name="usuario" class="form-control">
+                    <select name="usuario" class="form-control" required autofocus>
                         <?php 
                         while($mostrar = mysqli_fetch_array($result)){      
                                 ?>
@@ -107,10 +115,13 @@ if (isset($_POST['agregar'])){
                         ?>
                     </select>
                 </div>
+                <div class="col-md-1">
+                    <p style="color:red">*</p>
+                </div>
             </div>
             <br>
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <label for="adecuacion">Adecuacion al puesto: </label>
                 </div>
                 <div class="col-md-8 input-group mb-4">
@@ -118,6 +129,9 @@ if (isset($_POST['agregar'])){
                     <div class="input-group-append">
                         <span class="input-group-text">%</span>
                     </div>
+                </div>
+                <div class="col-md-1">
+                    <p style="color:red">*</p>
                 </div>
             </div>
             <br>
@@ -147,6 +161,7 @@ if (isset($_POST['agregar'])){
     </div>
     </div>
 </div>
+<br>
 <a href="Merito.php?var=<?php echo $id?>">Volver a Orden de Merito</a>
 
  <?php 

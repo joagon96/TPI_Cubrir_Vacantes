@@ -85,54 +85,71 @@ if (isset($_POST['postular'])){
             }
         }
     }
+include "obligatorios.html";
 ?>
 
 <div class="container">
     <form method="POST" class="form-signin rounded" style="background-color: #e9ecef" enctype="multipart/form-data">
         <h1 class="h3 mb-3 font-weight-normal">Postulacion para <?php echo $infoVacante['titulo'] ?></h1>
+        <br>
         <div class="row">
-            <div class="col-md-4 text-right">
+            <div class="col-md-2 text-right">
                 <label for="nombre">Nombre:</label>
             </div>
             <div class="col-md-8">
                 <input type="text" name="nombre" value="<?php echo $nombre?>" class="form-control" required autofocus>
             </div>
+            <div class="col-md 2">
+                <p style="color:red">*</p>
+            </div>
         </div>
         <br>
         <div class="row">
-            <div class="col-md-4 text-right">
+            <div class="col-md-2 text-right">
                 <label for="apellido">Apellido:</label>
             </div>
             <div class="col-md-8">
                 <input type="text" name="apellido" value="<?php echo $apellido?>" class="form-control" required>
             </div>
+            <div class="col-md 2">
+                <p style="color:red">*</p>
+            </div>
         </div>
         <br>
         <div class="row">
-            <div class="col-md-4 text-right">
+            <div class="col-md-2 text-right">
                 <label for="apellido">Telefono:</label>
             </div>
             <div class="col-md-8">
                 <input type="number" name="telefono" value="<?php echo $telefono?>" class="form-control" required>
             </div>
+            <div class="col-md 2">
+                <p style="color:red">*</p>
+            </div>
         </div>
         <br>
         <div class="row">
-            <div class="col-md-4 text-right">
+            <div class="col-md-2 text-right">
                 <label for="apellido">Email:</label>
             </div>
             <div class="col-md-8">
                 <input type="text" name="email" value="<?php echo $email?>" class="form-control" required>
             </div>
+            <div class="col-md 2">
+                <p style="color:red">*</p>
+            </div>
         </div>
         <br>
         <div class="row">
-            <div class="col-md-4 text-right">
+            <div class="col-md-2 text-right">
                 <label for="cv">Curriculum:</label>
             </div>
             <div class="col-md-8">
                 <input type="file" name="cv" required>
-            </div>            
+            </div>      
+            <div class="col-md 2">
+                <p style="color:red">*</p>
+            </div>      
         </div>     
         <br>
         <?php 
@@ -144,6 +161,7 @@ if (isset($_POST['postular'])){
         ?>
     </form>
 </div>
+<a href="Detalles.php?var=<?php echo $id?>">Volver</a>
 
  <?php 
  include "Footer.php"

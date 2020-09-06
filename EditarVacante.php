@@ -85,6 +85,7 @@ $modificado = 0; //Representa si el cambio fue aceptado.
             <?php
         }
     }
+include "obligatorios.html";
     ?>
 
     <div class="container">
@@ -95,7 +96,7 @@ $modificado = 0; //Representa si el cambio fue aceptado.
             <form method="POST" class="form-signin rounded" style="background-color: #e9ecef">
                 <h1 class="h3 mb-3 font-weight-normal">Datos de la Vacante</h1>
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <label for="titulo">Titulo Vacante:</label>
                     </div>
                     <div class="col-md-8">
@@ -106,10 +107,13 @@ $modificado = 0; //Representa si el cambio fue aceptado.
                             readonly <?php
                         }?> >
                     </div>
+                    <div class="col-md-1">
+                        <p style="color:red">*</p>
+                    </div>
                 </div>
                 <br>
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <label for="fechaDesde">Fecha Desde:</label>
                     </div>
                     <div class="col-md-8">
@@ -120,10 +124,13 @@ $modificado = 0; //Representa si el cambio fue aceptado.
                             readonly <?php
                         }?> >
                     </div>
+                    <div class="col-md-1">
+                        <p style="color:red">*</p>
+                    </div>
                 </div>
                 <br>
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <label for="fechaHasta">Fecha Hasta: </label>
                     </div>
                     <div class="col-md-8">
@@ -134,10 +141,13 @@ $modificado = 0; //Representa si el cambio fue aceptado.
                             readonly <?php
                         }?> >
                     </div>
+                    <div class="col-md-1">
+                        <p style="color:red">*</p>
+                    </div>
                 </div>
                 <br>
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <label for="descripcion">Descripcion del puesto: </label>
                     </div>
                     <div class="col-md-8">
@@ -147,6 +157,9 @@ $modificado = 0; //Representa si el cambio fue aceptado.
                             ?>
                             readonly <?php
                         }?> ><?php echo($infoVacante['descripcion'])?></textarea>
+                    </div>
+                    <div class="col-md-1">
+                        <p style="color:red">*</p>
                     </div>
                 </div>
                 <br>

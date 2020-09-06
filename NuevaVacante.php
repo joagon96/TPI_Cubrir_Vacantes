@@ -44,44 +44,57 @@ include "conexion.php";
         <?php
     }
  } 
+ include "obligatorios.html";
  ?>
 
 <div class="container">
     <form method="POST" class="form-signin rounded" style="background-color: #e9ecef">
         <h1 class="h3 mb-3 font-weight-normal">Datos de la Vacante</h1>
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <label for="titulo">Titulo Vacante:</label>
             </div>
             <div class="col-md-8">
                 <input type="text" name="titulo" class="form-control" required autofocus>
             </div>
+            <div class="col-md-1">
+                <p style="color:red">*</p>
+            </div>
         </div>
         <br>
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <label for="fechaDesde">Fecha Desde:</label>
             </div>
             <div class="col-md-8">
                 <input type="date" name="fechaDesde" class="form-control" required autofocus>
             </div>
+            <div class="col-md-1">
+                <p style="color:red">*</p>
+            </div>
         </div>
         <br>
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <label for="fechaHasta">Fecha Hasta: </label>
             </div>
             <div class="col-md-8">
                 <input type="date" name="fechaHasta" class="form-control" required>
             </div>
+            <div class="col-md-1">
+                <p style="color:red">*</p>
+            </div>
         </div>
         <br>
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <label for="descripcion">Descripcion del puesto: </label>
             </div>
             <div class="col-md-8">
                 <textarea  name="descripcion" class="form-control" required></textarea>
+            </div>
+            <div class="col-md-1">
+                <p style="color:red">*</p>
             </div>
         </div>
         <br>

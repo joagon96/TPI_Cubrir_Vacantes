@@ -35,20 +35,44 @@
         $query1 = "UPDATE usuarios
                     SET nombre = '$nombre', apellido = '$apellido', telefono = '$telefono'
                     WHERE usuario ='$usuario'";
-        $result1 = mysqli_query($link, $query1); } ?>
+        $result1 = mysqli_query($link, $query1); } 
+
+include "obligatorios.html";     
+?>
 
 <div class="container">
     <form  method="POST" class="form-signin rounded" style="background-color: #e9ecef">
         <h1 class="h3 mb-3 font-weight-normal">Editar Perfil</h1>
         <br>
-        <label for="nombre">Nombre</label>
-        <input type="text" name="nombre" class="form-control" value="<?php echo $nombre; ?>" required autofocus>
+        <div class="row">
+            <div class="col-md-10">
+                <label for="nombre" class="sr-only">Nombre</label>
+                <input type="text" name="nombre" class="form-control" placeholder="Nombre" value="<?php echo $nombre; ?>" required autofocus>
+            </div>   
+            <div class="col-md-2">
+                <p style="color:red">*</p>
+            </div> 
+        </div>
         <br>
-        <label for="apellido">Apellido</label>
-        <input type="text" name="apellido" class="form-control" value="<?php echo $apellido; ?>" required autofocus>
+        <div class="row">
+            <div class="col-md-10">
+                <label for="apellido" class="sr-only">Apellido</label>
+                <input type="text" name="apellido" class="form-control" placeholder="Apellido" value="<?php echo $apellido; ?>" required autofocus>
+            </div>   
+            <div class="col-md-2">
+                <p style="color:red">*</p>
+            </div> 
+        </div>
         <br>
-        <label for="telefono">Telefono</label>
-        <input type="text" name="telefono" class="form-control" value="<?php echo $telefono; ?>" required autofocus>
+        <div class="row">
+            <div class="col-md-10">
+                <label for="telefono" class="sr-only">Telefono</label>
+                <input type="text" name="telefono" class="form-control" placeholder="Telefono" value="<?php echo $telefono; ?>" required autofocus>
+            </div>   
+            <div class="col-md-2">
+                <p style="color:red">*</p>
+            </div> 
+        </div> 
         <br>
         <button class="btn btn-lg btn-primary btn-block" type="submit" name="editar">Editar</button>
     </form>
