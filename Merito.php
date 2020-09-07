@@ -62,8 +62,7 @@ $infoVacante = mysqli_fetch_array($result);
         <table class="card-table table">
             <thead>
             <tr>            
-                <th scope="col">Numero</th>
-                <th scope="col">Nombre</th>
+                <th scope="col">Apellido, Nombre</th>
                 <th scope="col">Adecuacion</th>
             </tr>
             </thead>
@@ -72,8 +71,7 @@ $infoVacante = mysqli_fetch_array($result);
                 while ($mostrar = mysqli_fetch_array($result)){
                 ?>
                 <tr>
-                    <td><?php echo $mostrar['id']?></td>
-                    <td><?php echo $mostrar['usuario']?></td>
+                    <td><?php echo $mostrar['apellido'].", ".$mostrar['nombre']?></td>
                     <td><?php echo $mostrar['adecuacion']?>%</td>
                 </tr>
                 <?php

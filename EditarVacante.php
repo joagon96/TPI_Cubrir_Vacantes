@@ -85,7 +85,6 @@ $modificado = 0; //Representa si el cambio fue aceptado.
             <?php
         }
     }
-include "obligatorios.html";
     ?>
 
     <div class="container">

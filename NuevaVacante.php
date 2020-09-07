@@ -43,8 +43,7 @@ include "conexion.php";
         <div class="alert alert-danger" role="alert">Error en la Base de Datos, intentelo de nuevo mas tarde</div>
         <?php
     }
- } 
- include "obligatorios.html";
+ }
  ?>
 
 <div class="container">
@@ -102,9 +101,9 @@ include "conexion.php";
     </form>
 </div>
 <a href="CubrirVacantes.php">Volver a Vacantes</a>
- <?php 
- include "Footer.php"
- ?>
+<?php 
+include "Footer.php"
+?>
 
  <!-- JS, Popper.js, and jQuery -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

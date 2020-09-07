@@ -4,10 +4,8 @@ include "conexion.php";
 $query = "SELECT * FROM vacantes;";
 $result = mysqli_query($link, $query);
 
-session_start();
-if (isset($_SESSION['usuario'])){
-    $tipo = $_SESSION['tipo'];
-}
+//session_start();
+
 ?>
 <html lang="en">
 <head>
@@ -27,7 +25,7 @@ if (isset($_SESSION['usuario'])){
     <!-- CSS only -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-}
+
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -35,8 +33,11 @@ if (isset($_SESSION['usuario'])){
 </head>
 <body class="text-center">
 
- <?php 
- include "Header.php"
+<?php 
+include "Header.php";
+if (isset($_SESSION['usuario'])){
+    $tipo = $_SESSION['tipo'];
+}
  ?>
 <h1>Bolsa de Trabajo</h1>
 
@@ -54,7 +55,7 @@ if (isset($_SESSION['usuario'])){
                     <div class="col-md-2">
                     <a href="NuevaVacante.php" class="btn btn-primary" role="button" >Nueva Vacante</a>
                     </div>
-                <?php }elseif($tipo == "usuario"){
+                <?php }else if($tipo == "usuario" or $tipo == "jefe"){
                     ?>
                     <h2 class="text-center">Vacantes</h2>
                     <?php

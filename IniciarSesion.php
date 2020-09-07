@@ -36,10 +36,9 @@
         $_SESSION['tipo'] = $extraido['tipo'];
         $_SESSION['usuario'] = $usuario;
         header("Location:Home.php");
-      } else { echo $activado; ?><div class="alert alert-danger" role="alert">Active su cuenta por favor</div><?php }
+      } else { ?><div class="alert alert-danger" role="alert">Active su cuenta por favor</div><?php }
     } else { ?><div class="alert alert-danger" role="alert">Usuario y/o contraseña incorrecto</div><?php }
  }
- include "obligatorios.html";
  ?>
 
 
@@ -47,25 +46,11 @@
     <form method="POST" class="form-signin rounded" style="background-color: #e9ecef">
         <h1 class="h3 mb-3 font-weight-normal">Ingrese sus datos</h1>
         <br>
-        <div class="row">
-            <div class="col-md-10">
-                <label for="usuario" class="sr-only">Usuario</label>
-                <input type="text" name="usuario" class="form-control" placeholder="Usuario" required autofocus>
-            </div>
-            <div class="col-2">
-                <p style="color:red">*</p>
-            </div>
-        </div>
+            <label for="usuario" class="sr-only">Usuario</label>
+            <input type="text" name="usuario" class="form-control" placeholder="Usuario" required autofocus>
         <br>
-        <div class="row">
-            <div class="col-md-10">
             <label for="contraseña" class="sr-only">Contraseña</label>
             <input type="password" name="contraseña" class="form-control" placeholder="Contraseña" required>
-        </div>
-        <div class="col-2">
-            <p style="color:red">*</p>
-        </div>
-    </div>
         <br>
         <button class="btn btn-lg btn-primary btn-block" type="submit" name="iniciar">Iniciar sesion</button>
     

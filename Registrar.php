@@ -29,13 +29,16 @@ include_once "conexion.php";
     $email = $_POST['email'];
     $contraseña = $_POST['contraseña'];
     $tipo = 'usuario';
+    $nombre = $_POST['nombre'];
+    $apellido = $_POST['apellido'];
+    $telefono = $_POST['telefono'];
 
     $query1 = "SELECT * FROM usuarios WHERE usuario ='$usuario' OR email = '$email'";
     $result1 = mysqli_query($link, $query1);
     $filasq1 = mysqli_num_rows($result1);
 
     if ($filasq1 == 0){
-        $query2 = "INSERT INTO usuarios (usuario, email, contraseña, tipo) VALUES ('$usuario','$email','$contraseña','$tipo');";
+        $query2 = "INSERT INTO usuarios (usuario, email, contraseña, tipo, nombre, apellido, telefono) VALUES ('$usuario','$email','$contraseña','$tipo','$nombre','$apellido','$telefono');";
 
         $result2 = mysqli_query($link, $query2);
 

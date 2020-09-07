@@ -43,6 +43,9 @@
      </html>
      ';
      mail($email,$asunto,$cuerpo,$cabeceras);
+     ?>
+     <div class="alert alert-success" role="alert">Consulta enviada, nos contactaremos de inmediato.</div>
+     <?php
    } else { ?><div class="alert alert-danger" role="alert">Inicie sesión para enviar consulta.</div><?php }
    }?>
 
@@ -56,6 +59,7 @@
         <button class="btn btn-lg btn-primary btn-block" type="submit" name="enviar">Enviar Consulta</button>
     </form>
 </div>
+<a href="Home.php">Volver a Inicio</a>
 
  <?php include "Footer.php" ?>
 
