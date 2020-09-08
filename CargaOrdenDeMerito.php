@@ -107,9 +107,18 @@ if (isset($_POST['agregar'])){
                 <div class="col-md-8">
                     <select name="usuario" class="form-control" required autofocus>
                         <?php 
+
+                        $query5 = "SELECT * FROM merito INNER JOIN usuarios ON merito.id_usuario = usuarios.id WHERE id_vacante = '$id';";
+                        $result5 = mysqli_query($link, $query5); // consulta que busca a los usuarios que ya esten registrados en es lorden de merito
+                        $registrados = []; 
+                        while ($user = mysqli_fetch_array($result5)){
+                            array_push($registrados,$user['usuario']); //meto en un array solo el nombre de usuario ed los que ya estan registrados
+                        }
+                        
+
                         while($mostrar = mysqli_fetch_array($result)){      
                                 ?>
-                                <option value="<?php echo $mostrar['usuario']?>"><?php echo $mostrar['usuario']?></option>
+                                <option value="<?php echo $mostrar['usuario'] ?>"><?php if (!in_array($mostrar['usuario'],$registrados)) { echo $mostrar['nombre'].' '.$mostrar['apellido']; }?></option>
                                 <?php                        
                         }
                         ?>
@@ -122,7 +131,7 @@ if (isset($_POST['agregar'])){
             <br>
             <div class="row">
                 <div class="col-md-3">
-                    <label for="adecuacion">Adecuacion al puesto: </label>
+                    <label for="adecuacion">Adecuacion al puesto:  </label>
                 </div>
                 <div class="col-md-8 input-group mb-4">
                     <input type="number" name="adecuacion" class="form-control" required>
@@ -150,7 +159,7 @@ if (isset($_POST['agregar'])){
 
             while ($datos = mysqli_fetch_array($result4)){
                 ?>
-                <label ><?php echo $datos['usuario'] ?></label><br>
+                <label ><?php echo $datos['nombre'].' '.$datos['apellido'] ?></label><br>
                 <?php
             }
             ?>
