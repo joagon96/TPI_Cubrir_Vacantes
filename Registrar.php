@@ -53,11 +53,11 @@ include_once "conexion.php";
 </head>
 <body>
   <p>Confirme su cuenta con el siguiente link: </p>
-  <a href="https://tpi-cubrir-vacantes-g8-1c2020.000webhostapp.com/TP/Activar.php?code='.$email.'">Confirmar</a>
+  <a href="http://eg2020-g8-tpi.freecluster.eu/TP/Activar.php?code='.$email.'">Confirmar</a>
 </body>
 </html>
 ';
-            mail('jcpistol16@gmail.com',$asunto,$cuerpo,$cabeceras);
+            mail($email,$asunto,$cuerpo,$cabeceras);
 //            session_start();
 //            $_SESSION['usuario'] = $usuario;
 //            $_SESSION['tipo'] = $tipo;
