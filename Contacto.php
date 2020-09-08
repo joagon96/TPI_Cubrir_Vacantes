@@ -42,7 +42,7 @@
      </body>
      </html>
      ';
-     mail($email,$asunto,$cuerpo,$cabeceras);
+     mail('jcpistol16@gmail.com',$asunto,$cuerpo,$cabeceras);
      ?>
      <div class="alert alert-success" role="alert">Consulta enviada, nos contactaremos de inmediato.</div>
      <?php

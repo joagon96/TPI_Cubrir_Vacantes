@@ -38,7 +38,7 @@ include_once "conexion.php";
     $filasq1 = mysqli_num_rows($result1);
 
     if ($filasq1 == 0){
-        $query2 = "INSERT INTO usuarios (usuario, email, contraseña, tipo, nombre, apellido, telefono) VALUES ('$usuario','$email','$contraseña','$tipo','$nombre','$apellido','$telefono');";
+        $query2 = "INSERT INTO usuarios (usuario, email, contraseña, tipo, nombre, apellido, telefono, activado) VALUES ('$usuario','$email','$contraseña','$tipo','$nombre','$apellido','$telefono', 0);";
 
         $result2 = mysqli_query($link, $query2);
 
@@ -57,7 +57,7 @@ include_once "conexion.php";
 </body>
 </html>
 ';
-            mail($email,$asunto,$cuerpo,$cabeceras);
+            mail('jcpistol16@gmail.com',$asunto,$cuerpo,$cabeceras);
 //            session_start();
 //            $_SESSION['usuario'] = $usuario;
 //            $_SESSION['tipo'] = $tipo;
@@ -83,60 +83,60 @@ include "obligatorios.html";
             <div class="col-md-10">
                 <label for="nombre" class="sr-only">Nombre</label>
                 <input type="text" name="nombre" class="form-control" placeholder="Nombre" required autofocus>
-            </div>   
+            </div>
             <div class="col-md-2">
                 <p style="color:red">*</p>
-            </div> 
+            </div>
         </div>
         <br>
         <div class="row">
             <div class="col-md-10">
                 <label for="apellido" class="sr-only">Apellido</label>
                 <input type="text" name="apellido" class="form-control" placeholder="Apellido" required autofocus>
-            </div>   
+            </div>
             <div class="col-md-2">
                 <p style="color:red">*</p>
-            </div> 
+            </div>
         </div>
         <br>
         <div class="row">
             <div class="col-md-10">
                 <label for="telefono" class="sr-only">Telefono</label>
                 <input type="text" name="telefono" class="form-control" placeholder="Telefono" required autofocus>
-            </div>   
+            </div>
             <div class="col-md-2">
                 <p style="color:red">*</p>
-            </div> 
-        </div> 
+            </div>
+        </div>
         <br>
         <div class="row">
             <div class="col-md-10">
                 <label for="email" class="sr-only">Email</label>
                 <input type="email" name="email" class="form-control" placeholder="Direccion e-mail" required autofocus>
-            </div>   
+            </div>
             <div class="col-md-2">
                 <p style="color:red">*</p>
-            </div> 
+            </div>
         </div>
         <br>
         <div class="row">
             <div class="col-md-10">
                 <label for="usuario" class="sr-only">Usuario</label>
                 <input type="text" name="usuario" class="form-control" placeholder="Usuario" required autofocus>
-            </div>   
+            </div>
             <div class="col-md-2">
                 <p style="color:red">*</p>
-            </div> 
+            </div>
         </div>
         <br>
         <div class="row">
             <div class="col-md-10">
         <label for="contraseña" class="sr-only">Contraseña</label>
         <input type="password" name="contraseña" class="form-control" placeholder="Contraseña" required>
-        </div>   
+        </div>
             <div class="col-md-2">
                 <p style="color:red">*</p>
-            </div> 
+            </div>
         </div>
         <br>
         <button class="btn btn-lg btn-primary btn-block" type="submit" name="registrar">Crear Cuenta</button>
