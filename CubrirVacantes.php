@@ -1,7 +1,7 @@
 <?php
 include "conexion.php";
 
-$query = "SELECT * FROM vacantes;";
+$query = "SELECT * FROM vacantes ORDER BY fecha_hasta DESC;";
 $result = mysqli_query($link, $query);
 
 //session_start();
