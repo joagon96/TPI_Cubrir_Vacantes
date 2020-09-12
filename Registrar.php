@@ -28,47 +28,53 @@ include_once "conexion.php";
     $usuario = $_POST['usuario'];
     $email = $_POST['email'];
     $contraseña = $_POST['contraseña'];
+    $contraseña2 = $_POST['contraseña2'];
     $tipo = 'usuario';
     $nombre = $_POST['nombre'];
     $apellido = $_POST['apellido'];
     $telefono = $_POST['telefono'];
 
-    $query1 = "SELECT * FROM usuarios WHERE usuario ='$usuario' OR email = '$email'";
-    $result1 = mysqli_query($link, $query1);
-    $filasq1 = mysqli_num_rows($result1);
+    if ($contraseña == $contraseña2){
 
-    if ($filasq1 == 0){
-        $query2 = "INSERT INTO usuarios (usuario, email, contraseña, tipo, nombre, apellido, telefono, activado) VALUES ('$usuario','$email','$contraseña','$tipo','$nombre','$apellido','$telefono', 0);";
+        $query1 = "SELECT * FROM usuarios WHERE usuario ='$usuario' OR email = '$email'";
+        $result1 = mysqli_query($link, $query1);
+        $filasq1 = mysqli_num_rows($result1);
 
-        $result2 = mysqli_query($link, $query2);
+        if ($filasq1 == 0){
+            $query2 = "INSERT INTO usuarios (usuario, email, contraseña, tipo, nombre, apellido, telefono, activado) VALUES ('$usuario','$email','$contraseña','$tipo','$nombre','$apellido','$telefono', 0);";
 
-        if ($result2){
-          $asunto = 'Confirmación de cuenta';
-          $cabeceras  = 'MIME-Version: 1.0' . "\r\n";
-          $cabeceras .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-          $cuerpo = '
-<html>
-<head>
-  <title>Mail de confirmación UTN FrRo</title>
-</head>
-<body>
-  <p>Confirme su cuenta con el siguiente link: </p>
-  <a href="http://eg2020-g8-tpi.freecluster.eu/TP/Activar.php?code='.$email.'">Confirmar</a>
-</body>
-</html>
-';
-            mail($email,$asunto,$cuerpo,$cabeceras);
-//            session_start();
-//            $_SESSION['usuario'] = $usuario;
-//            $_SESSION['tipo'] = $tipo;
-            ?> <div class="alert alert-success" role="alert">Cuenta creada, verifique su casilla para confirmar el registro</div> <?php
+            $result2 = mysqli_query($link, $query2);
+
+            if ($result2){
+            $asunto = 'Confirmación de cuenta';
+            $cabeceras  = 'MIME-Version: 1.0' . "\r\n";
+            $cabeceras .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+            $cuerpo = '
+    <html>
+    <head>
+    <title>Mail de confirmación UTN FrRo</title>
+    </head>
+    <body>
+    <p>Confirme su cuenta con el siguiente link: </p>
+    <a href="http://eg2020-g8-tpi.freecluster.eu/TP/Activar.php?code='.$email.'">Confirmar</a>
+    </body>
+    </html>
+    ';
+                mail($email,$asunto,$cuerpo,$cabeceras);
+    //            session_start();
+    //            $_SESSION['usuario'] = $usuario;
+    //            $_SESSION['tipo'] = $tipo;
+                ?> <div class="alert alert-success" role="alert">Cuenta creada, verifique su casilla para confirmar el registro</div> <?php
+            }else{
+                ?> <div class="alert alert-danger" role="alert">Error en la Base de Datos, intentelo de nuevo mas tarde</div> <?php
+            }
         }else{
-            ?> <div class="alert alert-danger" role="alert">Error en la Base de Datos, intentelo de nuevo mas tarde</div> <?php
+            ?>
+            <div class="alert alert-danger" role="alert">El usuario o email ingresado ya existe, ingrese uno diferente</div>
+            <?php
         }
     }else{
-        ?>
-        <div class="alert alert-danger" role="alert">El usuario o email ingresado ya existe, ingrese uno diferente</div>
-        <?php
+        ?> <div class="alert alert-danger" role="alert">Los campos Contraseña y Confirmar Contraseña deben ser iguales</div> <?php
     }
 }
 include "obligatorios.html";
@@ -133,6 +139,16 @@ include "obligatorios.html";
             <div class="col-md-10">
         <label for="contraseña" class="sr-only">Contraseña</label>
         <input type="password" name="contraseña" class="form-control" placeholder="Contraseña" required>
+        </div>
+            <div class="col-md-2">
+                <p style="color:red">*</p>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-10">
+        <label for="contraseña2" class="sr-only">Confirmar Contraseña</label>
+        <input type="password" name="contraseña2" class="form-control" placeholder="Confirmar Contraseña" required>
         </div>
             <div class="col-md-2">
                 <p style="color:red">*</p>
