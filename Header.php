@@ -14,9 +14,7 @@ if (isset($_SESSION['usuario'])){
               <a class="nav-link" href="CubrirVacantes.php">Bolsa de trabajo</a>
             </li>
           </ul>
-          <?php
-          if(!isset($usu)){
-          ?>
+          <?php if(!isset($usu)){ ?>
             <ul class="navbar-nav " >
               <li  class="nav-item">
                   <a class="nav-link" href="IniciarSesion.php">Iniciar Sesion</a>
@@ -25,11 +23,12 @@ if (isset($_SESSION['usuario'])){
                   <a class="nav-link" href="Registrar.php">Registrar</a>
               </li>
             </ul>
-          <?php
-          }
-          else {
-          ?>
+          <?php } else { ?>
               <ul class="navbar-nav">
+                <?php if($usu == 'admin'){ ?>
+                  <li class="nav-item">
+                    <a class="nav-link" href="CrearJefe.php">Crear Jefe</a>
+                  </li><?php } ?>
                 <li  class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropDown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php echo $usu ?></a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
