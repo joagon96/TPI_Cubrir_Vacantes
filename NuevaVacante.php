@@ -14,6 +14,8 @@ include "conexion.php";
     <!-- CSS only -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     
+    
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nueva Vacante</title>
@@ -31,7 +33,6 @@ include "conexion.php";
 
  
     $query = "INSERT INTO vacantes (titulo, fecha_desde, fecha_hasta, descripcion) VALUES ('$titulo','$fechaDesde','$fechaHasta','$descripcion');";
-
     $result = mysqli_query($link, $query);  
 
     if ($result){
@@ -61,12 +62,36 @@ include "conexion.php";
             </div>
         </div>
         <br>
+            <div class="row">
+                <div class="col-md-3">
+                    <label for="titulo">Catedra:</label>
+                </div>
+                <div class="col-md-8">
+                    <select name="usuario" class="form-control" required autofocus>                      
+                       <?php
+
+                        $query2 = "SELECT * FROM catedras ;";
+                        $result2 = mysqli_query($link, $query2);
+
+                        while($mostrar = mysqli_fetch_array($result2)){      
+                                ?>
+                                <option value="<?php echo $mostrar['nombre'] ?>"><?php echo $mostrar['nombre']?></option>
+                                <?php                        
+                        }
+                        ?>
+                    </select>
+                </div>
+                <div class="col-md-1">
+                    <p style="color:red">*</p>
+                </div>
+            </div>
+            <br>
         <div class="row">
             <div class="col-md-3">
                 <label for="fechaDesde">Fecha Desde:</label>
             </div>
             <div class="col-md-8">
-                <input type="date" name="fechaDesde" class="form-control" required autofocus>
+                <input type="date" name="fechaDesde" id="fechaDesde" class="form-control" value="<?php echo date("Y-m-d");?>" required autofocus disabled>
             </div>
             <div class="col-md-1">
                 <p style="color:red">*</p>
@@ -78,7 +103,7 @@ include "conexion.php";
                 <label for="fechaHasta">Fecha Hasta: </label>
             </div>
             <div class="col-md-8">
-                <input type="date" name="fechaHasta" class="form-control" required>
+                <input type="date" name="fechaHasta" class="form-control" min="<?php echo date("Y-m-d", strtotime(date("d-m-Y")."+ 1 days"));?>" required>
             </div>
             <div class="col-md-1">
                 <p style="color:red">*</p>
