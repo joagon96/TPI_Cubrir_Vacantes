@@ -102,7 +102,7 @@ include "obligatorios.html";
                 <select name="usuario" class="form-control" required autofocus>                      
                     <?php
 
-                    $query2 = "SELECT * FROM catedras ;";
+                    $query2 = "SELECT * FROM catedras WHERE id_jefe is NULL;";
                     $result2 = mysqli_query($link, $query2);
 
                     while($mostrar = mysqli_fetch_array($result2)){      
