@@ -189,7 +189,7 @@ $modificado = 0; //Representa si el cambio fue aceptado.
     <?php
     } else    //Si ya acepte, muestro VOLVER como un BOTON
     { ?>
-        <a href="./CubrirVacantes.php" class="btn btn-primary" role="button">Volver</a>
+        <a href="VacantesPaginacion.php" class="btn btn-primary" role="button">Volver</a>
     <?php
     }
     include "Footer.php"

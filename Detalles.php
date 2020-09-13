@@ -100,7 +100,7 @@ if(isset($_SESSION['usuario'])){
     </div>
 </div>
 
-<a href="CubrirVacantes.php">Volver a Vacantes</a>
+<a href="VacantesPaginacion.php">Volver a Vacantes</a>
 
  <?php 
  include "Footer.php";

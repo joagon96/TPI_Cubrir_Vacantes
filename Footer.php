@@ -4,7 +4,7 @@
         <div class="text-left" style="background-color: whitesmoke; width: 100%; padding: 10px 0 20px 0;">
                 <ul style="list-style-type: none;">
                         <li><a href="Home.php">Inicio</a></li>
-                        <li><a href="CubrirVacantes.php">Bolsa de trabajo</a></li>
+                        <li><a href="VacantesPaginacion.php">Bolsa de trabajo</a></li>
                         <li><a href="Contacto.php">Contacto</a></li>
                         <?php
                         if (isset($_SESSION['usuario'])) {

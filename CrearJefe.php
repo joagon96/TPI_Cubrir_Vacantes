@@ -99,13 +99,24 @@ include "obligatorios.html";
         <br>
         <div class="row">
             <div class="col-md-10">
-        <label for="catedra" class="sr-only">Cátedra</label>
-        <input type="text" name="catedra" class="form-control" placeholder="Cátedra" required>
-        </div>
-            <div class="col-md-2">
-                <p style="color:red">*</p>
+                <select name="usuario" class="form-control" required autofocus>                      
+                    <?php
+
+                    $query2 = "SELECT * FROM catedras ;";
+                    $result2 = mysqli_query($link, $query2);
+
+                    while($mostrar = mysqli_fetch_array($result2)){      
+                            ?>
+                            <option value="<?php echo $mostrar['nombre'] ?>"><?php echo $mostrar['nombre']?></option>
+                            <?php                        
+                    }
+                    ?>
+                </select>
+                </div>
+                <div class="col-md-2">
+                    <p style="color:red">*</p>
+                </div>
             </div>
-        </div>
         <br>
         <button class="btn btn-lg btn-primary btn-block" type="submit" name="registrar">Crear Cuenta</button>
     </form>

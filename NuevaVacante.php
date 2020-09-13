@@ -91,7 +91,7 @@ include "conexion.php";
                 <label for="fechaDesde">Fecha Desde:</label>
             </div>
             <div class="col-md-8">
-                <input type="date" name="fechaDesde" id="fechaDesde" class="form-control" value="<?php echo date("Y-m-d");?>" required autofocus disabled>
+                <input type="date" name="fechaDesde" class="form-control" min="<?php echo date("Y-m-d", strtotime(date("d-m-Y")."- 1 days"));?>" max="<?php echo date("Y-m-d");?>" value="<?php echo date("Y-m-d");?>" required autofocus>
             </div>
             <div class="col-md-1">
                 <p style="color:red">*</p>
@@ -125,7 +125,7 @@ include "conexion.php";
         <button class="btn btn-lg btn-primary" type="submit" name="registrarVacante">Crear Vacante</button>
     </form>
 </div>
-<a href="CubrirVacantes.php">Volver a Vacantes</a>
+<a href="VacantesPaginacion.php">Volver a Vacantes</a>
 <?php 
 include "Footer.php"
 ?>
