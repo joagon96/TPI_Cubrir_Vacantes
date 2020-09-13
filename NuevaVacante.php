@@ -129,7 +129,7 @@ include "conexion.php";
         <button class="btn btn-lg btn-primary" type="submit" name="registrarVacante">Crear Vacante</button>
     </form>
 </div>
-<a href="VacantesPaginacion.php">Volver a Vacantes</a>
+<a href="VacantesPaginacion.php?pagina=">Volver a Vacantes</a>
 <?php 
 include "Footer.php"
 ?>

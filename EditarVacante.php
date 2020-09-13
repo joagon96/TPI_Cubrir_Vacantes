@@ -225,7 +225,7 @@ $nomCat = mysqli_fetch_object($resultNomCat)->nombre;//Devuelvo un objeto y acce
     <?php
     } else    //Si ya acepte, muestro VOLVER como un BOTON
     { ?>
-        <a href="VacantesPaginacion.php" class="btn btn-primary" role="button">Volver</a>
+        <a href="VacantesPaginacion.php?pagina=" class="btn btn-primary" role="button">Volver</a>
     <?php
     }
     include "Footer.php"

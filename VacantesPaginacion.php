@@ -4,6 +4,7 @@ include "Header.php";
 
 $TAMANO_PAGINA = 5;
 
+
 $pagina = $_GET["pagina"];
 if (!$pagina){
     $inicio = 0;
