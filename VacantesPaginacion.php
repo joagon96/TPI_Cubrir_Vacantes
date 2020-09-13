@@ -21,29 +21,28 @@ if (isset($_SESSION['usuario'])){
     $resultIdUsu = mysqli_query($link, $queryIdUsu);
     $idUsu = mysqli_fetch_object($resultIdUsu)->id;//Devuelvo un objeto y accedo a su propiedad id*/
 
-    $query = "SELECT * FROM usuarios AS us
+    $query2 = "SELECT * FROM usuarios AS us
     INNER JOIN catedras AS ca ON us.id = ca.id_jefe
     INNER JOIN vacantes AS va ON ca.id = va.id_catedra
     WHERE us.usuario = '$usu'";
+    $query = $query2;
     
     }
     else{
-        $query = "SELECT * FROM vacantes ORDER BY fecha_hasta DESC LIMIT ".$inicio.",".$TAMANO_PAGINA;
+        $query = "SELECT * FROM vacantes";
+        $query2 = "SELECT * FROM vacantes ORDER BY fecha_hasta DESC LIMIT ".$inicio.",".$TAMANO_PAGINA;
     }
     
 }
 else{
-    $query = "SELECT * FROM vacantes ORDER BY fecha_hasta DESC LIMIT ".$inicio.",".$TAMANO_PAGINA;
+    $query = "SELECT * FROM vacantes";
+    $query2 = "SELECT * FROM vacantes ORDER BY fecha_hasta DESC LIMIT ".$inicio.",".$TAMANO_PAGINA;
 }
 
 $result = mysqli_query($link, $query);
 $cant_vacantes = mysqli_num_rows($result);
 
 $total_paginas = ceil($cant_vacantes/$TAMANO_PAGINA);
-
-// echo "Número de registros encontrados: " . $cant_vacantes . "<br>";
-// echo "Se muestran páginas de " . $TAMANO_PAGINA . " registros cada una<br>";
-// echo "Mostrando la página " . $pagina . " de " . $total_paginas . "<p>";
 
 ?>
 <html lang="en">
@@ -74,9 +73,7 @@ $total_paginas = ceil($cant_vacantes/$TAMANO_PAGINA);
 
 <?php 
 
-
-$query2 = "SELECT * FROM vacantes ORDER BY fecha_hasta DESC LIMIT ".$inicio.",".$TAMANO_PAGINA;
-$result2 = mysqli_query($link, $query);
+$result2 = mysqli_query($link, $query2); // UTILIZA LA QUERY CREADA SEGUN EL TIPO DE USUARIO
  ?>
  <h1>Bolsa de Trabajo</h1>
 
