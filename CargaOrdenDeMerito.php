@@ -10,7 +10,8 @@ $usuariosRegsitrados=[];
 session_start();
 if (isset($_SESSION['usuario'])) {
     $usuario = $_SESSION['usuario'];
-    if ($usuario !="admin" and $usuario !="jefe"){
+    $tipo = $_SESSION['tipo'];
+    if($tipo !="admin" and $tipo !="jefe"){
         header("location: ./Page404.html");}}
 else{
     header("location: ./Page404.html");}

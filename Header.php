@@ -11,7 +11,7 @@ if (isset($_SESSION['usuario'])){
               <a class="nav-link" href="Home.php">Inicio <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="VacantesPaginacion.php">Bolsa de trabajo</a>
+              <a class="nav-link" href="VacantesPaginacion.php?pagina=1">Bolsa de trabajo</a>
             </li>
           </ul>
           <?php if(!isset($usu)){ ?>

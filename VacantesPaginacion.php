@@ -1,5 +1,6 @@
 <?php
 include "conexion.php";
+include "Header.php";
 
 $TAMANO_PAGINA = 5;
 
@@ -11,7 +12,30 @@ if (!$pagina){
     $inicio = ($pagina - 1) * $TAMANO_PAGINA;
 }
 
-$query = "SELECT * FROM vacantes ;";
+if (isset($_SESSION['usuario'])){
+    $tipo = $_SESSION['tipo'];
+    $usu = $_SESSION['usuario'];
+
+    if($tipo == "jefe"){
+        /*$queryIdUsu = "SELECT id FROM usuarios WHERE usuario ='$usu';";
+    $resultIdUsu = mysqli_query($link, $queryIdUsu);
+    $idUsu = mysqli_fetch_object($resultIdUsu)->id;//Devuelvo un objeto y accedo a su propiedad id*/
+
+    $query = "SELECT * FROM usuarios AS us
+    INNER JOIN catedras AS ca ON us.id = ca.id_jefe
+    INNER JOIN vacantes AS va ON ca.id = va.id_catedra
+    WHERE us.usuario = '$usu'";
+    
+    }
+    else{
+        $query = "SELECT * FROM vacantes ORDER BY fecha_hasta DESC LIMIT ".$inicio.",".$TAMANO_PAGINA;
+    }
+    
+}
+else{
+    $query = "SELECT * FROM vacantes ORDER BY fecha_hasta DESC LIMIT ".$inicio.",".$TAMANO_PAGINA;
+}
+
 $result = mysqli_query($link, $query);
 $cant_vacantes = mysqli_num_rows($result);
 
@@ -49,13 +73,10 @@ $total_paginas = ceil($cant_vacantes/$TAMANO_PAGINA);
 <body class="text-center">
 
 <?php 
-include "Header.php";
-if (isset($_SESSION['usuario'])){
-    $tipo = $_SESSION['tipo'];
-}
+
 
 $query2 = "SELECT * FROM vacantes ORDER BY fecha_hasta DESC LIMIT ".$inicio.",".$TAMANO_PAGINA;
-$result2 = mysqli_query($link, $query2);
+$result2 = mysqli_query($link, $query);
  ?>
  <h1>Bolsa de Trabajo</h1>
 
