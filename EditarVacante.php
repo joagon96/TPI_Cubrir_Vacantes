@@ -1,11 +1,12 @@
 <?php
 include "conexion.php";
+include "Header.php";
 
-session_start();
 if (isset($_SESSION['usuario'])) {
     $usuario = $_SESSION['usuario'];
-    if ($usuario !="admin" and $usuario !="jefe"){
-        header("location: ./Page404.html");}
+    if ($usuario != "admin" and $usuario != "jefe") {
+        header("location: ./Page404.html");
+    }
 } else {
     header("location: ./Page404.html");
 }
@@ -18,6 +19,11 @@ $result = mysqli_query($link, $query);
 $infoVacante = mysqli_fetch_array($result);
 
 $modificado = 0; //Representa si el cambio fue aceptado.
+
+$idCat = $infoVacante['id_catedra'];
+$queryNomCat = "SELECT nombre FROM catedras WHERE id ='$idCat';";
+$resultNomCat = mysqli_query($link, $queryNomCat);
+$nomCat = mysqli_fetch_object($resultNomCat)->nombre;//Devuelvo un objeto y accedo a su propiedad nombre
 
 ?>
 <html lang="en">
@@ -42,28 +48,32 @@ $modificado = 0; //Representa si el cambio fue aceptado.
 <body class="text-center">
 
     <?php
-    include "Header.php";
+    
     //MODIFICAR VACANTE------------------------
     if (isset($_POST['modificarVacante'])) {
         $titulo = $_POST['titulo'];
         $fechaDesde = $_POST['fechaDesde'];
         $fechaHasta = $_POST['fechaHasta'];
         $descripcion = $_POST['descripcion'];
+        $catedra = $_POST['catedra'];
 
+        $queryIdCat = "SELECT id FROM catedras WHERE nombre ='$catedra';";
+        $resultIdCat = mysqli_query($link, $queryIdCat);
+        $idCat = mysqli_fetch_object($resultIdCat)->id;//Devuelvo un objeto y accedo a su propiedad id
 
-        $query = "UPDATE vacantes SET titulo='$titulo', fecha_desde='$fechaDesde', fecha_hasta='$fechaHasta', descripcion='$descripcion' WHERE id='$id' ;";
+        $query = "UPDATE vacantes SET titulo='$titulo', fecha_desde='$fechaDesde', fecha_hasta='$fechaHasta', descripcion='$descripcion', id_catedra='$idCat' WHERE id='$id' ;";
 
         $result = mysqli_query($link, $query);
 
         if ($result) {
-            ?>
+    ?>
             <div class="alert alert-success" role="alert">La vacante fue modificada con exito</div>
-            <?php
+        <?php
             $modificado = 1;
         } else {
-            ?>
+        ?>
             <div class="alert alert-danger" role="alert">Error en la Base de Datos, intentelo de nuevo mas tarde</div>
-            <?php
+        <?php
         }
     }
 
@@ -75,14 +85,14 @@ $modificado = 0; //Representa si el cambio fue aceptado.
         $result = mysqli_query($link, $query);
 
         if ($result) {
-            ?>
+        ?>
             <div class="alert alert-success" role="alert">La vacante fue eliminada con exito</div>
-            <?php
+        <?php
             $modificado = 2;
         } else {
-            ?>
+        ?>
             <div class="alert alert-danger" role="alert">Error en la Base de Datos, intentelo de nuevo mas tarde</div>
-            <?php
+    <?php
         }
     }
     ?>
@@ -99,12 +109,45 @@ $modificado = 0; //Representa si el cambio fue aceptado.
                         <label for="titulo">Titulo Vacante:</label>
                     </div>
                     <div class="col-md-8">
-                        <input type="text" name="titulo" value="<?php echo($infoVacante['titulo'])?>" class="form-control" required autofocus
-                        <?php if ($acc=="Eliminar") //Si estoy eliminando vacante hago el campo de solo lectura
+                        <input type="text" name="titulo" value="<?php echo ($infoVacante['titulo']) ?>" class="form-control" required autofocus
+                        <?php if ($acc == "Eliminar") //Si estoy eliminando vacante hago el campo de solo lectura
                         {
+                            ?> readonly <?php
+                        } ?>>
+                    </div>
+                    <div class="col-md-1">
+                        <p style="color:red">*</p>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label for="titulo">Catedra:</label>
+                    </div>
+                    <div class="col-md-8">
+                        <select name="catedra" class="form-control" required autofocus
+                            <?php if ($acc == "Eliminar") {
+                                ?> disabled <?php
+                            } ?> >
+                            <?php
+
+                            $query2 = "SELECT * FROM catedras ;";
+                            $result2 = mysqli_query($link, $query2);
+
+                            while ($mostrar = mysqli_fetch_array($result2)) {
                             ?>
-                            readonly <?php
-                        }?> >
+                                <option value="<?php echo $mostrar['nombre'] ?>"
+                                <?php if($mostrar['nombre'] == $nomCat) 
+                                {?>
+                                    selected="selected"
+                                    <?php
+                                } ?>
+                                >
+                                <?php echo $mostrar['nombre'] ?></option>
+                            <?php
+                            }
+                            ?>
+                        </select>
                     </div>
                     <div class="col-md-1">
                         <p style="color:red">*</p>
@@ -116,12 +159,10 @@ $modificado = 0; //Representa si el cambio fue aceptado.
                         <label for="fechaDesde">Fecha Desde:</label>
                     </div>
                     <div class="col-md-8">
-                        <input type="date" name="fechaDesde" value="<?php echo($infoVacante['fecha_desde'])?>" class="form-control" required autofocus
-                        <?php if ($acc=="Eliminar")
-                        {
-                            ?>
-                            readonly <?php
-                        }?> >
+                        <input type="date" name="fechaDesde" value="<?php echo ($infoVacante['fecha_desde']) ?>" class="form-control" required autofocus
+                        <?php if ($acc == "Eliminar") {
+                            ?> readonly <?php
+                            } ?>>
                     </div>
                     <div class="col-md-1">
                         <p style="color:red">*</p>
@@ -133,12 +174,10 @@ $modificado = 0; //Representa si el cambio fue aceptado.
                         <label for="fechaHasta">Fecha Hasta: </label>
                     </div>
                     <div class="col-md-8">
-                        <input type="date" name="fechaHasta" value="<?php echo($infoVacante['fecha_hasta'])?>" class="form-control" required
-                        <?php if ($acc=="Eliminar")
-                        {
-                            ?>
-                            readonly <?php
-                        }?> >
+                        <input type="date" name="fechaHasta" value="<?php echo ($infoVacante['fecha_hasta']) ?>" class="form-control" required
+                        <?php if ($acc == "Eliminar") {
+                            ?> readonly <?php
+                            } ?>>
                     </div>
                     <div class="col-md-1">
                         <p style="color:red">*</p>
@@ -150,12 +189,10 @@ $modificado = 0; //Representa si el cambio fue aceptado.
                         <label for="descripcion">Descripcion del puesto: </label>
                     </div>
                     <div class="col-md-8">
-                        <textarea name="descripcion" class="form-control" required
-                        <?php if ($acc=="Eliminar")
-                        {
-                            ?>
-                            readonly <?php
-                        }?> ><?php echo($infoVacante['descripcion'])?></textarea>
+                        <textarea name="descripcion" class="form-control" required 
+                        <?php if ($acc == "Eliminar") {
+                            ?> readonly <?php
+                            } ?>><?php echo ($infoVacante['descripcion']) ?></textarea>
                     </div>
                     <div class="col-md-1">
                         <p style="color:red">*</p>
@@ -163,21 +200,20 @@ $modificado = 0; //Representa si el cambio fue aceptado.
                 </div>
                 <br>
                 <?php
-                if ($acc=="Modificar"){
-                    ?>
+                if ($acc == "Modificar") {
+                ?>
                     <button class="btn btn-lg btn-primary" type="submit" name="modificarVacante">Modificar</button>
-                    <?php
-                }
-                else{
-                    ?>
+                <?php
+                } else {
+                ?>
                     <button class="btn btn-lg btn-danger" type="submit" name="eliminarVacante">Eliminar</button>
-                    <?php
+                <?php
                 }
                 ?>
-                
+
             </form>
         <?php
-        }//Muestro el texto del boton modificarVariante segun si entre para modificar o eliminar, determinado en la variable $acc
+        } //Muestro el texto del boton modificarVariante segun si entre para modificar o eliminar, determinado en la variable $acc
         ?>
 
     </div>

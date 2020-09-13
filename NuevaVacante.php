@@ -30,9 +30,13 @@ include "conexion.php";
     $fechaDesde = $_POST['fechaDesde'];
     $fechaHasta = $_POST['fechaHasta'];
     $descripcion = $_POST['descripcion'];
+    $catedra = $_POST['catedra'];
 
+    $queryIdCat = "SELECT id FROM catedras WHERE nombre ='$catedra';";
+    $resultIdCat = mysqli_query($link, $queryIdCat);
+    $idCat = mysqli_fetch_object($resultIdCat)->id;//Devuelvo un objeto y accedo a su propiedad id
  
-    $query = "INSERT INTO vacantes (titulo, fecha_desde, fecha_hasta, descripcion) VALUES ('$titulo','$fechaDesde','$fechaHasta','$descripcion');";
+    $query = "INSERT INTO vacantes (titulo, fecha_desde, fecha_hasta, descripcion, id_catedra) VALUES ('$titulo','$fechaDesde','$fechaHasta','$descripcion','$idCat');";
     $result = mysqli_query($link, $query);  
 
     if ($result){
@@ -67,7 +71,7 @@ include "conexion.php";
                     <label for="titulo">Catedra:</label>
                 </div>
                 <div class="col-md-8">
-                    <select name="usuario" class="form-control" required autofocus>                      
+                    <select name="catedra" class="form-control" required autofocus>                      
                        <?php
 
                         $query2 = "SELECT * FROM catedras ;";

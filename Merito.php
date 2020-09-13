@@ -91,7 +91,7 @@ $infoVacante = mysqli_fetch_array($result);
                         </table>
             </div>
         </div>
-        <a href="CubrirVacantes.php">Volver a Vacantes</a>
+        <a href="VacantesPaginacion.php">Volver a Vacantes</a>
         <?php
         include "Footer.php"
         ?>
