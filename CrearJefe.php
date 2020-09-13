@@ -27,17 +27,33 @@ include_once "conexion.php";
  if (isset($_POST['registrar'])){
     $usuario = $_POST['usuario'];
     $email = $_POST['email'];
+    $contraseña = "default";
     $tipo = 'jefe';
-    $catedra = $_POST['catedra'];
+    $id_catedra = $_POST['catedra'];
+   
 
     $query1 = "SELECT * FROM usuarios WHERE usuario ='$usuario' OR email = '$email'";
     $result1 = mysqli_query($link, $query1);
     $filasq1 = mysqli_num_rows($result1);
 
+
+
     if ($filasq1 == 0){
-        $query2 = "INSERT INTO usuarios (usuario, email, contraseña, tipo, nombre, apellido, telefono, activado, catedra)
-        VALUES ('$usuario','$email','','$tipo','','','', 0, '$catedra');";
+        $query2 = "INSERT INTO usuarios (usuario, email, contraseña, tipo, nombre, apellido, telefono, activado)
+        VALUES ('$usuario','$email','$contraseña','$tipo','','','', 0);";
         $result2 = mysqli_query($link, $query2);
+
+        $queryIdUsu = "SELECT id FROM usuarios WHERE usuario ='$usuario';";
+        $resultIdUsu = mysqli_query($link, $queryIdUsu);
+        $idUsu = mysqli_fetch_object($resultIdUsu)->id;
+         
+        $query4 = "SELECT * FROM catedras WHERE id='$id_catedra';";
+        $result4 =  mysqli_query($link, $query4);
+        $nombre_catedra = mysqli_fetch_object($result4)->nombre;
+
+
+        $query3 = "UPDATE catedras SET id_jefe ='$idUsu', id = '$id_catedra', nombre = '$nombre_catedra' WHERE id = '$id_catedra';";
+        $result3 = mysqli_query($link, $query3);
 
             if ($result2){
             $asunto = 'Creación de cuenta Jefe de Cátedra';
@@ -99,7 +115,7 @@ include "obligatorios.html";
         <br>
         <div class="row">
             <div class="col-md-10">
-                <select name="usuario" class="form-control" required autofocus>                      
+                <select name="catedra" class="form-control" required autofocus>                      
                     <?php
 
                     $query2 = "SELECT * FROM catedras WHERE id_jefe is NULL;";
@@ -107,7 +123,7 @@ include "obligatorios.html";
 
                     while($mostrar = mysqli_fetch_array($result2)){      
                             ?>
-                            <option value="<?php echo $mostrar['nombre'] ?>"><?php echo $mostrar['nombre']?></option>
+                            <option value="<?php echo $mostrar['id'] ?>"><?php echo $mostrar['nombre']?></option>
                             <?php                        
                     }
                     ?>
