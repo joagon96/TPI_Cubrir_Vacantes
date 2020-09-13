@@ -91,7 +91,7 @@ $modificado = 0; //Representa si el cambio fue aceptado.
                         <label for="fechaDesde">Adecuacion:</label>
                     </div>
                     <div class="col-md-3">
-                        <input type="number" name="adecuacion" value="<?php echo($infoMerito['adecuacion'])?>" class="form-control" required autofocus>
+                        <input type="number" min="0" max="100" name="adecuacion" value="<?php echo($infoMerito['adecuacion'])?>" class="form-control" required autofocus>
                     </div>
                     <div class="input-group-append">
                         <span class="input-group-text">%</span>

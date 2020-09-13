@@ -135,7 +135,7 @@ if (isset($_POST['agregar'])){
                     <label for="adecuacion">Adecuacion al puesto:  </label>
                 </div>
                 <div class="col-md-8 input-group mb-4">
-                    <input type="number" name="adecuacion" class="form-control" required>
+                    <input type="number" name="adecuacion" min="0" max="100" class="form-control" required>
                     <div class="input-group-append">
                         <span class="input-group-text">%</span>
                     </div>
