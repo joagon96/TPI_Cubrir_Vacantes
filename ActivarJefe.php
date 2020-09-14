@@ -2,7 +2,8 @@
 $msg='Email confirmado';
 if(!empty($_GET['code']) && isset($_GET['code'])) {
   $code=mysqli_real_escape_string($link,$_GET['code']);
-  $c=mysqli_query($link,"SELECT id FROM usuarios WHERE email='$code'"); ?>
+  $c=mysqli_query($link,"SELECT id FROM usuarios WHERE email='$code'");
+  $tipo_msg='' ?>
 
 <html lang="en">
 <head>

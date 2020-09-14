@@ -160,7 +160,6 @@ include "obligatorios.html";
 </div>
 
 
-
  <?php
  include "Footer.php"
  ?>
