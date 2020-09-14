@@ -24,91 +24,90 @@ if(!empty($_GET['code']) && isset($_GET['code'])) {
 <body class="text-center">
 
  <?php include "Header.php";
- if(!isset($tipo_msg)){
-    if(mysqli_num_rows($c) > 0) {
-    $count=mysqli_query($link,"SELECT id FROM usuarios WHERE email='$code' and activado='0'");
-        if(mysqli_num_rows($count) == 1) {
-        if(isset($_POST['registrar'])) {
-            $contraseña = $_POST['contraseña'];
-            $contraseña2 = $_POST['contraseña2'];
-            $nombre = $_POST['nombre'];
-            $apellido = $_POST['apellido'];
-            $telefono = $_POST['telefono'];
-            if($contraseña <> $contraseña2) {?> <div class="alert alert-danger" role="alert">Los campos Contraseña y Confirmar Contraseña deben ser iguales</div> <?php
-            } else {
-            mysqli_query($link,"UPDATE usuarios
-                SET activado='1', contraseña = '$contraseña', nombre = '$nombre',
-                apellido = '$apellido', telefono = '$telefono'
-                WHERE email='$code'");
-            $msg = "Tu cuenta ha sido activada";
-            $tipo_msg = 'success';
-            } } if ($tipo_msg <> 'success') {?>
+ if(mysqli_num_rows($c) > 0) {
+   $count=mysqli_query($link,"SELECT id FROM usuarios WHERE email='$code' and activado='0'");
+     if(mysqli_num_rows($count) == 1) {
+       if(isset($_POST['registrar'])) {
+          $contraseña = $_POST['contraseña'];
+          $contraseña2 = $_POST['contraseña2'];
+          $nombre = $_POST['nombre'];
+          $apellido = $_POST['apellido'];
+          $telefono = $_POST['telefono'];
+          if($contraseña <> $contraseña2) {?> <div class="alert alert-danger" role="alert">Los campos Contraseña y Confirmar Contraseña deben ser iguales</div> <?php
+          } else {
+           mysqli_query($link,"UPDATE usuarios
+             SET activado='1', contraseña = '$contraseña', nombre = '$nombre',
+             apellido = '$apellido', telefono = '$telefono'
+             WHERE email='$code'");
+           $msg = "Tu cuenta ha sido activada";
+           $tipo_msg = 'success';
+         } } if ($tipo_msg <> 'success') {?>
 
-            <div class="container">
-                <form  method="POST" class="form-signin rounded" style="background-color: #e9ecef">
-                    <h1 class="h3 mb-3 font-weight-normal">Crear Cuenta</h1>
-                    <div class="row">
-                        <div class="col-md-10">
-                            <label for="nombre" class="sr-only">Nombre</label>
-                            <input type="text" name="nombre" class="form-control" placeholder="Nombre" required autofocus>
-                        </div>
-                        <div class="col-md-2">
-                            <p style="color:red">*</p>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-md-10">
-                            <label for="apellido" class="sr-only">Apellido</label>
-                            <input type="text" name="apellido" class="form-control" placeholder="Apellido" required autofocus>
-                        </div>
-                        <div class="col-md-2">
-                            <p style="color:red">*</p>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-md-10">
-                            <label for="telefono" class="sr-only">Telefono</label>
-                            <input type="text" name="telefono" class="form-control" placeholder="Telefono" required autofocus>
-                        </div>
-                        <div class="col-md-2">
-                            <p style="color:red">*</p>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-md-10">
-                    <label for="contraseña" class="sr-only">Contraseña</label>
-                    <input type="password" name="contraseña" class="form-control" placeholder="Contraseña" required>
-                    </div>
-                        <div class="col-md-2">
-                            <p style="color:red">*</p>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-md-10">
-                    <label for="contraseña2" class="sr-only">Confirmar Contraseña</label>
-                    <input type="password" name="contraseña2" class="form-control" placeholder="Confirmar Contraseña" required>
-                    </div>
-                        <div class="col-md-2">
-                            <p style="color:red">*</p>
-                        </div>
-                    </div>
-                    <br>
-                    <button class="btn btn-lg btn-primary btn-block" type="submit" name="registrar">Crear Cuenta</button>
-                </form>
-            </div>
+         <div class="container">
+             <form  method="POST" class="form-signin rounded" style="background-color: #e9ecef">
+                 <h1 class="h3 mb-3 font-weight-normal">Crear Cuenta</h1>
+                 <div class="row">
+                     <div class="col-md-10">
+                         <label for="nombre" class="sr-only">Nombre</label>
+                         <input type="text" name="nombre" class="form-control" placeholder="Nombre" required autofocus>
+                     </div>
+                     <div class="col-md-2">
+                         <p style="color:red">*</p>
+                     </div>
+                 </div>
+                 <br>
+                 <div class="row">
+                     <div class="col-md-10">
+                         <label for="apellido" class="sr-only">Apellido</label>
+                         <input type="text" name="apellido" class="form-control" placeholder="Apellido" required autofocus>
+                     </div>
+                     <div class="col-md-2">
+                         <p style="color:red">*</p>
+                     </div>
+                 </div>
+                 <br>
+                 <div class="row">
+                     <div class="col-md-10">
+                         <label for="telefono" class="sr-only">Telefono</label>
+                         <input type="text" name="telefono" class="form-control" placeholder="Telefono" required autofocus>
+                     </div>
+                     <div class="col-md-2">
+                         <p style="color:red">*</p>
+                     </div>
+                 </div>
+                 <br>
+                 <div class="row">
+                     <div class="col-md-10">
+                 <label for="contraseña" class="sr-only">Contraseña</label>
+                 <input type="password" name="contraseña" class="form-control" placeholder="Contraseña" required>
+                 </div>
+                     <div class="col-md-2">
+                         <p style="color:red">*</p>
+                     </div>
+                 </div>
+                 <br>
+                 <div class="row">
+                     <div class="col-md-10">
+                 <label for="contraseña2" class="sr-only">Confirmar Contraseña</label>
+                 <input type="password" name="contraseña2" class="form-control" placeholder="Confirmar Contraseña" required>
+                 </div>
+                     <div class="col-md-2">
+                         <p style="color:red">*</p>
+                     </div>
+                 </div>
+                 <br>
+                 <button class="btn btn-lg btn-primary btn-block" type="submit" name="registrar">Crear Cuenta</button>
+             </form>
+         </div>
 
 
-        <?php }} else {
-            $msg = "Tu cuenta ya estaba activada, no hay necesidad de volver a activarla";
-            $tipo_msg = 'warning';
-            }} else {
-        $msg = "Código de activación erróneo";
-        $tipo_msg = 'danger'; }
-} else { ?>
+       <?php }} else {
+           $msg = "Tu cuenta ya estaba activada, no hay necesidad de volver a activarla";
+           $tipo_msg = 'warning';
+         }} else {
+    $msg = "Código de activación erróneo";
+    $tipo_msg = 'danger'; }
+ if(isset($tipo_msg)) { ?>
  <div class="alert alert-<?php echo $tipo_msg; ?>" role="alert"><?php echo $msg; ?></div>
 <?php }} include "Footer.php" ?>
 
