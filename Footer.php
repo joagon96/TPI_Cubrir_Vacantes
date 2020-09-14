@@ -6,13 +6,15 @@
                         <li><a href="Home.php">Inicio</a></li>
                         <li><a href="VacantesPaginacion.php?pagina=">Bolsa de trabajo</a></li>
                         <li><a href="Contacto.php">Contacto</a></li>
+
                         <?php
                         if (isset($_SESSION['usuario'])) {
-                                $tipo = $_SESSION['tipo'];
-
-                                if ($tipo != "") {
+                                $tipo = $_SESSION['tipo'];?>
+                                <li><a href="EditarPerfil.php">Editar Perfil</a></li><?php
+                                if ($tipo == "admin") {
                                         ?>
-                                        <li><a href="Merito.php"></a></li>
+                                        <li><a href="NuevaVacante.php">Cargar Vacante</a></li>
+                                        <li><a href="CrearJefe.php">Crear Jefe</a></li>
                                         <?php
                                 }
                         }
